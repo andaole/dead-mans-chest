@@ -4,3 +4,4 @@ partyword*
 *.xlsx
 __pycache__/
 .DS_Store
+.render_cache/

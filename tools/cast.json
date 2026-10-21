@@ -1,7 +1,7 @@
 [
   {"num": "01", "player": "David", "character": "Captain ‘Black’ Jack McCracken", "aka": "Black Jack", "tagline": "the dashing Captain of the Scurvy Knave", "side": "The Scurvy Knave"},
   {"num": "02", "player": "Danny", "character": "Sawbones McGraw", "aka": "Sawbones", "tagline": "the sarcastic but reliable ship’s doctor", "side": "The Scurvy Knave"},
-  {"num": "03", "player": "Alex (Improv)", "character": "Quintus Swelter", "aka": "Swelter", "tagline": "the vain and sinister ship’s cook", "side": "The Scurvy Knave"},
+  {"num": "03", "player": "Alex J.", "character": "Quintus Swelter", "aka": "Swelter", "tagline": "the vain and sinister ship’s cook", "side": "The Scurvy Knave"},
   {"num": "04", "player": "Morgan", "character": "‘Tom’", "aka": "Tom", "tagline": "the helpful young ship’s boy", "side": "The Scurvy Knave"},
   {"num": "06", "player": "John", "character": "Louis de Monnaie", "aka": "Louis", "tagline": "a lazy French deckhand on the Scurvy Knave", "side": "The Scurvy Knave"},
   {"num": "07", "player": "Karen", "character": "Captain ‘Saucy’ Nancy Martin", "aka": "Saucy Nancy", "tagline": "the bold and fiery Captain of the Fury", "side": "The Fury"},
@@ -15,7 +15,7 @@
   {"num": "15", "player": "Courtney", "character": "Wynn Harcourt", "aka": "Wynn", "tagline": "the Governor’s private secretary", "side": "Colonial forces"},
   {"num": "16", "player": "Alvaro", "character": "Captain Hal Overy", "aka": "Overy", "tagline": "the stubborn and blunt Royal Navy captain", "side": "Royal Navy"},
   {"num": "17", "player": "Boom", "character": "Captain Rafa Ortega", "aka": "Ortega", "tagline": "master of Don Inigo’s wrecked ship, the Santa Clara", "side": "The Spanish"},
-  {"num": "18", "player": "Alex (Anthony’s)", "character": "Hayapitl", "aka": "Hayapitl", "tagline": "the diplomatic Diaho chief", "side": "The Diaho"},
+  {"num": "18", "player": "Alex G.", "character": "Hayapitl", "aka": "Hayapitl", "tagline": "the diplomatic Diaho chief", "side": "The Diaho"},
   {"num": "19", "player": "Nancy", "character": "Cassinga", "aka": "Cassinga", "tagline": "the intimidating Diaho shaman", "side": "The Diaho"},
   {"num": "20", "player": "Justina", "character": "Tokeleth", "aka": "Tokeleth", "tagline": "the chief’s headstrong daughter", "side": "The Diaho"},
   {"num": "21", "player": "Jose", "character": "Don Inigo de Velez y Contrera", "aka": "Don Inigo", "tagline": "the aristocratic and condescending Spanish nobleman", "side": "The Spanish"},

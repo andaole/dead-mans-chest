@@ -119,10 +119,10 @@ footer{color:#8fa4aa;text-align:center;font-size:13px;margin-top:28px}
     </div>
     <form id="codeForm">
       <label for="codeInput">Your personal code</label>
-      <input type="text" id="codeInput" class="code" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="ABC-123">
+      <input type="text" id="codeInput" class="code" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="e.g. FURY-27">
       <div class="row"><button class="btn" id="codeBtn" type="submit">Open my packet</button></div>
       <div class="msg" id="codeMsg"></div>
-      <p class="tip">Anthony texted you your code. Lost it? Ask him.</p>
+      <p class="tip">Your code is your group plus the two digits Anthony texted you. Lost it? Ask him.</p>
     </form>
   </section>
 
@@ -150,7 +150,7 @@ footer{color:#8fa4aa;text-align:center;font-size:13px;margin-top:28px}
         <p class="sub" style="margin-bottom:12px">Your envelope opens when the game starts. Anthony will announce the party word. Enter it here.</p>
         <form id="envForm">
           <label for="envInput">Party word</label>
-          <input type="text" id="envInput" class="code" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="WORD-WORD-00">
+          <input type="text" id="envInput" class="code" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="Party word">
           <div class="row"><button class="btn" id="envBtn" type="submit">Open my envelope</button></div>
           <div class="msg" id="envMsg"></div>
         </form>
@@ -176,6 +176,14 @@ footer{color:#8fa4aa;text-align:center;font-size:13px;margin-top:28px}
   const enc = new TextEncoder();
   const norm = s => (s || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
   const fold = s => (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[‘’'`]/g, '').replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
+  const ALIASES = { SCURVYKNAVE: 'KNAVE', SCURVY: 'KNAVE', COLONIALFORCES: 'COLONIAL', COLONY: 'COLONIAL', COLONIALS: 'COLONIAL',
+    ROYALNAVY: 'NAVY', SPAIN: 'SPANISH', SPANIARDS: 'SPANISH', INDIE: 'INDEPENDENT', INDEPENDENTS: 'INDEPENDENT' };
+  // "the Fury 27" -> "FURY27" (must match canon_code() in tools/build_site.py)
+  const canonCode = s => {
+    const t = norm(s); let letters = t.replace(/[0-9]/g, ''); const digits = t.replace(/[^0-9]/g, '');
+    if (letters.startsWith('THE') && letters.length > 3) letters = letters.slice(3);
+    return (ALIASES[letters] || letters) + digits;
+  };
   const unb64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
   const store = {
     get(){ try { return JSON.parse(localStorage.getItem('admc') || 'null'); } catch { return null; } },
@@ -241,9 +249,9 @@ footer{color:#8fa4aa;text-align:center;font-size:13px;margin-top:28px}
     const btn = $('codeBtn'), msg = $('codeMsg');
     btn.disabled = true; btn.textContent = 'Checking…'; msg.textContent = ''; msg.className = 'msg';
     try {
-      const key = await tryKey(norm(c), me.sa);
+      const key = await tryKey(canonCode(c), me.sa);
       if (!key) { if (!quiet) { msg.textContent = `That code doesn't match ${me.character}. Check the text from Anthony.`; msg.className = 'msg bad'; } return false; }
-      code = norm(c); saKey = key;
+      code = canonCode(c); saKey = key;
       const saved = store.get() || {}; store.set({ num: me.num, code, party: saved.num === me.num ? saved.party : undefined });
       enterViewer();
       return true;

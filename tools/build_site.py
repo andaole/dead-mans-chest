@@ -11,8 +11,8 @@ Usage:
       --codes ../codes.json [--party-word KRAKEN-RUM-7342 | --no-envelope-lock]
 
   --packets  folder holding 1_Send_ahead/ and 2_Envelopes/ (files start "NN ")
-  --codes    JSON file {"01": "ABC-DEF", ...}. Missing codes are generated and
-             written back. KEEP THIS FILE OUT OF THE REPO.
+  --codes    JSON file {"01": "KNAVE-27", ...}: group word + two digits.
+             Missing codes are generated and written back. Keep it out of the repo.
 
 Needs: poppler-utils (pdftoppm), Pillow, cryptography.
 """
@@ -27,7 +27,16 @@ ROOT = os.path.dirname(HERE)
 DATA = os.path.join(ROOT, "data")
 
 ITER = 400_000
-ALPHABET = "ABCDEFGHJKMNPQRSTUVWXYZ23456789"   # no 0/O, 1/I/L
+CACHE = os.path.join(ROOT, ".render_cache")   # plaintext page renders (gitignored)
+
+# A player's code is their group word + two digits, e.g. FURY-27.
+GROUP = {"The Scurvy Knave": "KNAVE", "The Fury": "FURY", "Colonial forces": "COLONIAL",
+         "Royal Navy": "NAVY", "The Spanish": "SPANISH", "The Diaho": "DIAHO",
+         "Independent": "INDEPENDENT", "The island": "ISLAND"}
+# Spellings players might type; index.html carries the same table.
+ALIASES = {"SCURVYKNAVE": "KNAVE", "SCURVY": "KNAVE", "COLONIALFORCES": "COLONIAL",
+           "COLONY": "COLONIAL", "COLONIALS": "COLONIAL", "ROYALNAVY": "NAVY", "SPAIN": "SPANISH",
+           "SPANIARDS": "SPANISH", "INDIE": "INDEPENDENT", "INDEPENDENTS": "INDEPENDENT"}
 CHECK = b"ahoy-matey"
 MAX_W = 1275          # 150 dpi letter width
 QUALITY = 72
@@ -41,9 +50,22 @@ def norm(s):
     return re.sub(r"[^A-Z0-9]", "", (s or "").upper())
 
 
-def new_code():
-    c = "".join(secrets.choice(ALPHABET) for _ in range(6))
-    return c[:3] + "-" + c[3:]
+def canon_code(s):
+    """'the Fury 27' -> 'FURY27'. Must match canonCode() in index.html."""
+    t = norm(s)
+    letters, digits = re.sub(r"[0-9]", "", t), re.sub(r"[^0-9]", "", t)
+    if letters.startswith("THE") and len(letters) > 3:
+        letters = letters[3:]
+    return ALIASES.get(letters, letters) + digits
+
+
+def new_code(side, used):
+    while True:
+        d = secrets.randbelow(90) + 10
+        code = f"{GROUP[side]}-{d}"
+        if d not in used:
+            used.add(d)
+            return code
 
 
 def derive(secret, salt):
@@ -68,19 +90,26 @@ def find_pdf(folder, num):
 
 def render(pdf, skip=()):
     """Return list of WebP bytes, one per page (minus 1-based pages in skip)."""
+    h = hashlib.sha256(open(pdf, "rb").read()).hexdigest()[:20]
+    cdir = os.path.join(CACHE, h)
+    n_pages = int(re.search(r"Pages:\s+(\d+)", subprocess.run(["pdfinfo", pdf], capture_output=True, text=True).stdout).group(1))
+    want = [n for n in range(1, n_pages + 1) if n not in skip]
+    if all(os.path.exists(os.path.join(cdir, f"p{n}.webp")) for n in want):
+        return [open(os.path.join(cdir, f"p{n}.webp"), "rb").read() for n in want]
+    os.makedirs(cdir, exist_ok=True)
     with tempfile.TemporaryDirectory() as td:
         subprocess.run(["pdftoppm", "-r", "150", "-png", pdf, os.path.join(td, "p")], check=True)
         out = []
         files = sorted(glob.glob(os.path.join(td, "p-*.png")), key=lambda p: int(re.findall(r"(\d+)\.png$", p)[0]))
         for n, f in enumerate(files, 1):
-            if n in skip:
-                continue
             im = Image.open(f).convert("RGB")
             if im.width > MAX_W:
                 im = im.resize((MAX_W, round(im.height * MAX_W / im.width)), Image.LANCZOS)
             buf = io.BytesIO()
             im.save(buf, "WEBP", quality=QUALITY, method=6)
-            out.append(buf.getvalue())
+            open(os.path.join(cdir, f"p{n}.webp"), "wb").write(buf.getvalue())
+            if n not in skip:
+                out.append(buf.getvalue())
         return out
 
 
@@ -108,15 +137,16 @@ def main():
 
     cast = json.load(open(os.path.join(HERE, "cast.json"), encoding="utf-8"))
     codes = json.load(open(a.codes)) if os.path.exists(a.codes) else {}
+    used = {int(re.sub(r"[^0-9]", "", v)) for v in codes.values()}
     for c in cast:
-        codes.setdefault(c["num"], new_code())
-    if len(set(norm(v) for v in codes.values())) != len(codes):
+        codes.setdefault(c["num"], new_code(c["side"], used))
+    if len(set(canon_code(v) for v in codes.values())) != len(codes):
         sys.exit("Duplicate codes in codes file")
     json.dump(codes, open(a.codes, "w"), indent=2)
 
     party = None if a.no_envelope_lock else norm(a.party_word)
-    if party is not None and len(party) < 6:
-        sys.exit("Party word is too short (use 6+ letters/digits)")
+    if party is not None and len(party) < 3:
+        sys.exit("Party word is too short")
 
     old = {}
     if a.envelopes_only:
@@ -130,7 +160,7 @@ def main():
 
     players = []
     for c in cast:
-        code = norm(codes[c["num"]])
+        code = canon_code(codes[c["num"]])
         env = render(find_pdf(os.path.join(a.packets, "2_Envelopes"), c["num"]),
                      ENV_SKIP_ALL | ENV_SKIP.get(c["num"], set()))
         env_secret = code + "|" + party if party else code + "|envelope"
