@@ -4,26 +4,27 @@ A small static site where each player at our *A Dead Man's Chest* murder mystery
 (a Freeform Games freeform, hosted at Anthony's on the night of the party) can look up their own character packet.
 
 1. A player types their name or their character's name.
-2. They enter their **code**: their group plus two digits Anthony texted them (e.g. `FURY-27`).
-3. They see their **send-ahead packet** ("Before the party").
-4. Their **envelope** stays sealed until Anthony announces the **party word** at the game.
+2. A pop-up checks they picked themselves (each packet is for one player only).
+3. They enter the **password** from Anthony's text.
+4. They see their **send-ahead packet** ("Before the party").
+5. Their **envelope** stays sealed until Anthony announces the **party word** at the game.
 
 ## Privacy
 
 Every page is stored only in encrypted form in `data/`, using AES-256-GCM.
 
-- The key for a player's send-ahead packet comes from their code, run through PBKDF2-SHA256 with 400k iterations and a per-section salt.
-- The key for their envelope comes from their code plus the party word.
+- The key for a player's send-ahead packet comes from their password, run through PBKDF2-SHA256 with 400k iterations and a per-section salt.
+- The key for their envelope comes from their password plus the party word.
 
-Without the right code, the files in this repo are noise. That holds even though the repo is public. Codes are deliberately easy to remember (group + two digits). That keeps out casual peeking, not a determined snoop, which is fine for a party. The site never sends codes anywhere; all decryption happens in the browser.
+Without the password, the files in this repo are noise. That holds even though the repo is public. Inside the party it's an honor system: passwords are deliberately simple, and the pop-up asks people to open only their own packet. The site never sends codes anywhere; all decryption happens in the browser.
 
 The cast list in `data/index.json` (player, character, side, one-line description) is public, the same as the casting list players already received.
 
-**The codes and the party word are NOT in this repo.** Anthony has them.
+**The passwords and the party word are NOT in this repo.** Anthony has them.
 
 ## Rebuilding
 
-To rebuild after a packet changes, keep `codes.json` *outside* the repo so everyone's codes stay the same:
+To rebuild after a packet changes, keep `codes.json` (the passwords) *outside* the repo:
 
 ```bash
 pip install pillow cryptography      # plus poppler-utils for pdftoppm

@@ -11,8 +11,8 @@ Usage:
       --codes ../codes.json [--party-word KRAKEN-RUM-7342 | --no-envelope-lock]
 
   --packets  folder holding 1_Send_ahead/ and 2_Envelopes/ (files start "NN ")
-  --codes    JSON file {"01": "KNAVE-27", ...}: group word + two digits.
-             Missing codes are generated and written back. Keep it out of the repo.
+  --codes    JSON file {"01": "David", ...}: each player's password (default:
+             their first name). Missing entries are filled in and written back.
 
 Needs: poppler-utils (pdftoppm), Pillow, cryptography.
 """
@@ -20,7 +20,7 @@ import argparse, base64, glob, io, json, os, re, secrets, shutil, subprocess, sy
 
 from PIL import Image
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
-import hashlib
+import hashlib, unicodedata
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
@@ -29,43 +29,11 @@ DATA = os.path.join(ROOT, "data")
 ITER = 400_000
 CACHE = os.path.join(ROOT, ".render_cache")   # plaintext page renders (gitignored)
 
-# A player's code is their group word + two digits, e.g. FURY-27.
-GROUP = {"The Scurvy Knave": "KNAVE", "The Fury": "FURY", "Colonial forces": "COLONIAL",
-         "Royal Navy": "NAVY", "The Spanish": "SPANISH", "The Diaho": "DIAHO",
-         "Independent": "INDEPENDENT", "The island": "ISLAND"}
-# Spellings players might type; index.html carries the same table.
-ALIASES = {"SCURVYKNAVE": "KNAVE", "SCURVY": "KNAVE", "COLONIALFORCES": "COLONIAL",
-           "COLONY": "COLONIAL", "COLONIALS": "COLONIAL", "ROYALNAVY": "NAVY", "SPAIN": "SPANISH",
-           "SPANIARDS": "SPANISH", "INDIE": "INDEPENDENT", "INDEPENDENTS": "INDEPENDENT"}
-CHECK = b"ahoy-matey"
-MAX_W = 1275          # 150 dpi letter width
-QUALITY = 72
-# Envelope pages players should NOT see (1-based). Page 1 of every envelope is the
-# host's "PUT IN THIS ENVELOPE" assembly sheet; Ortega's page 5 is host slips for others.
-ENV_SKIP_ALL = {1}
-ENV_SKIP = {"17": {5}}
-
 
 def norm(s):
-    return re.sub(r"[^A-Z0-9]", "", (s or "").upper())
-
-
-def canon_code(s):
-    """'the Fury 27' -> 'FURY27'. Must match canonCode() in index.html."""
-    t = norm(s)
-    letters, digits = re.sub(r"[0-9]", "", t), re.sub(r"[^0-9]", "", t)
-    if letters.startswith("THE") and len(letters) > 3:
-        letters = letters[3:]
-    return ALIASES.get(letters, letters) + digits
-
-
-def new_code(side, used):
-    while True:
-        d = secrets.randbelow(90) + 10
-        code = f"{GROUP[side]}-{d}"
-        if d not in used:
-            used.add(d)
-            return code
+    s = unicodedata.normalize("NFD", s or "")
+    s = "".join(ch for ch in s if not unicodedata.combining(ch))
+    return re.sub(r"[^A-Z0-9]", "", s.upper())
 
 
 def derive(secret, salt):
@@ -137,11 +105,10 @@ def main():
 
     cast = json.load(open(os.path.join(HERE, "cast.json"), encoding="utf-8"))
     codes = json.load(open(a.codes)) if os.path.exists(a.codes) else {}
-    used = {int(re.sub(r"[^0-9]", "", v)) for v in codes.values()}
+    # The password is the player's first name ("Alex J." -> "Alex"). index.html also
+    # accepts the full display name. Override per player in the codes file if needed.
     for c in cast:
-        codes.setdefault(c["num"], new_code(c["side"], used))
-    if len(set(canon_code(v) for v in codes.values())) != len(codes):
-        sys.exit("Duplicate codes in codes file")
+        codes.setdefault(c["num"], c["player"].split(" ")[0])
     json.dump(codes, open(a.codes, "w"), indent=2)
 
     party = None if a.no_envelope_lock else norm(a.party_word)
@@ -160,7 +127,7 @@ def main():
 
     players = []
     for c in cast:
-        code = canon_code(codes[c["num"]])
+        code = norm(codes[c["num"]])
         env = render(find_pdf(os.path.join(a.packets, "2_Envelopes"), c["num"]),
                      ENV_SKIP_ALL | ENV_SKIP.get(c["num"], set()))
         env_secret = code + "|" + party if party else code + "|envelope"

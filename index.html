@@ -86,6 +86,10 @@ figure.page figcaption{color:var(--muted);font-size:13px;text-align:center;margi
 .zoom img{display:block;width:min(1275px,200vw);max-width:none;margin:0 auto}
 .zoom .close{position:fixed;top:12px;right:12px;z-index:51}
 footer{color:#8fa4aa;text-align:center;font-size:13px;margin-top:28px}
+.modal{position:fixed;inset:0;z-index:60;background:rgba(5,10,12,.72);display:flex;align-items:center;justify-content:center;padding:16px}
+.modal .card{max-width:420px;width:100%;text-align:center}
+.modal .warn{font:600 12px/1 "Source Sans 3";letter-spacing:.18em;text-transform:uppercase;color:var(--rust);margin-bottom:10px}
+.modal .row{justify-content:center}
 .hidden{display:none!important}
 </style>
 </head>
@@ -118,11 +122,11 @@ footer{color:#8fa4aa;text-align:center;font-size:13px;margin-top:28px}
       <button class="linkbtn" id="backBtn" type="button">Not you?</button>
     </div>
     <form id="codeForm">
-      <label for="codeInput">Your personal code</label>
-      <input type="text" id="codeInput" class="code" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="e.g. FURY-27">
+      <label for="codeInput">Password</label>
+      <input type="text" id="codeInput" class="code" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="From Anthony's text">
       <div class="row"><button class="btn" id="codeBtn" type="submit">Open my packet</button></div>
       <div class="msg" id="codeMsg"></div>
-      <p class="tip">Your code is your group plus the two digits Anthony texted you. Lost it? Ask him.</p>
+      <p class="tip">Use the password from Anthony's text. Lost it? Ask him.</p>
     </form>
   </section>
 
@@ -165,6 +169,18 @@ footer{color:#8fa4aa;text-align:center;font-size:13px;margin-top:28px}
   <footer>A Dead Man's Chest © Freeform Games. Shared privately with our players only.</footer>
 </div>
 
+<div class="modal hidden" id="confirm" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+  <div class="card">
+    <div class="warn">For one pair of eyes only</div>
+    <h2 id="confirmTitle"></h2>
+    <p class="sub" id="confirmText" style="margin:8px 0 0"></p>
+    <div class="row">
+      <button class="btn" id="confirmYes" type="button"></button>
+      <button class="btn ghost" id="confirmNo" type="button">No, go back</button>
+    </div>
+  </div>
+</div>
+
 <div class="zoom" id="zoom" aria-hidden="true">
   <button class="btn close" id="zoomClose" type="button">Close</button>
   <img id="zoomImg" alt="">
@@ -174,16 +190,10 @@ footer{color:#8fa4aa;text-align:center;font-size:13px;margin-top:28px}
 (() => {
   const $ = id => document.getElementById(id);
   const enc = new TextEncoder();
-  const norm = s => (s || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+  const norm = s => (s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase().replace(/[^A-Z0-9]/g, '');
   const fold = s => (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[‘’'`]/g, '').replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
-  const ALIASES = { SCURVYKNAVE: 'KNAVE', SCURVY: 'KNAVE', COLONIALFORCES: 'COLONIAL', COLONY: 'COLONIAL', COLONIALS: 'COLONIAL',
-    ROYALNAVY: 'NAVY', SPAIN: 'SPANISH', SPANIARDS: 'SPANISH', INDIE: 'INDEPENDENT', INDEPENDENTS: 'INDEPENDENT' };
-  // "the Fury 27" -> "FURY27" (must match canon_code() in tools/build_site.py)
-  const canonCode = s => {
-    const t = norm(s); let letters = t.replace(/[0-9]/g, ''); const digits = t.replace(/[^0-9]/g, '');
-    if (letters.startsWith('THE') && letters.length > 3) letters = letters.slice(3);
-    return (ALIASES[letters] || letters) + digits;
-  };
+  // The password is the player's first name; the full display name ("John Dompor", "Alex J.") also works.
+  const secretFor = (s, p) => { const n = norm(s); return n === norm(p.player) ? norm(p.player.split(' ')[0]) : n; };
   const unb64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
   const store = {
     get(){ try { return JSON.parse(localStorage.getItem('admc') || 'null'); } catch { return null; } },
@@ -237,10 +247,20 @@ footer{color:#8fa4aa;text-align:center;font-size:13px;margin-top:28px}
     $(pre + 'Name').textContent = p.character;
     $(pre + 'Line').textContent = `${p.player}, you are ${p.tagline}.`;
   }
-  function pick(p) {
+  function pick(p, skipConfirm) {
+    if (!skipConfirm) return askConfirm(p);
     me = p; fillWho(p, 'c');
     show('stepCode'); $('codeInput').value = ''; $('codeMsg').textContent = '';
     setTimeout(() => $('codeInput').focus(), 50);
+  }
+  function askConfirm(p) {
+    const first = p.player.split(' ')[0];
+    $('confirmTitle').textContent = `Are you ${p.player}?`;
+    $('confirmText').textContent = `This is ${p.character}'s secret packet. Only ${first} should read it. If you're not ${first}, go back and find your own name.`;
+    $('confirmYes').textContent = `Yes, I'm ${first}`;
+    $('confirmYes').onclick = () => { $('confirm').classList.add('hidden'); pick(p, true); };
+    $('confirm').classList.remove('hidden');
+    setTimeout(() => $('confirmYes').focus(), 50);
   }
   function show(id) { ['stepWho', 'stepCode', 'stepView'].forEach(s => $(s).classList.toggle('hidden', s !== id)); }
 
@@ -249,9 +269,9 @@ footer{color:#8fa4aa;text-align:center;font-size:13px;margin-top:28px}
     const btn = $('codeBtn'), msg = $('codeMsg');
     btn.disabled = true; btn.textContent = 'Checking…'; msg.textContent = ''; msg.className = 'msg';
     try {
-      const key = await tryKey(canonCode(c), me.sa);
-      if (!key) { if (!quiet) { msg.textContent = `That code doesn't match ${me.character}. Check the text from Anthony.`; msg.className = 'msg bad'; } return false; }
-      code = canonCode(c); saKey = key;
+      const key = await tryKey(secretFor(c, me), me.sa);
+      if (!key) { if (!quiet) { msg.textContent = `That's not the password for ${me.character}. Check the text from Anthony.`; msg.className = 'msg bad'; } return false; }
+      code = secretFor(c, me); saKey = key;
       const saved = store.get() || {}; store.set({ num: me.num, code, party: saved.num === me.num ? saved.party : undefined });
       enterViewer();
       return true;
@@ -344,8 +364,9 @@ footer{color:#8fa4aa;text-align:center;font-size:13px;margin-top:28px}
       openEnvelope(k);
     } finally { btn.disabled = false; btn.textContent = 'Open my envelope'; }
   };
+  $('confirmNo').onclick = () => { $('confirm').classList.add('hidden'); show('stepWho'); $('whoInput').focus(); };
   $('zoomClose').onclick = () => $('zoom').classList.remove('on');
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') $('zoom').classList.remove('on'); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') { $('zoom').classList.remove('on'); if (!$('confirm').classList.contains('hidden')) $('confirmNo').click(); } });
 
   // ---------- boot ----------
   fetch('data/index.json', { cache: 'no-cache' }).then(r => r.json()).then(async idx => {
@@ -353,7 +374,7 @@ footer{color:#8fa4aa;text-align:center;font-size:13px;margin-top:28px}
     if (!window.crypto || !crypto.subtle) { $('whoMsg').textContent = 'This browser can\'t open the packets. Try Safari or Chrome.'; $('whoMsg').className = 'msg bad'; return; }
     const saved = store.get();
     const p = saved && INDEX.players.find(x => x.num === saved.num);
-    if (p && saved.code) { pick(p); $('codeInput').value = saved.code; if (await unlock(saved.code, true)) return; show('stepCode'); }
+    if (p && saved.code) { pick(p, true); $('codeInput').value = saved.code; if (await unlock(saved.code, true)) return; show('stepCode'); }
     else $('whoInput').focus();
   }).catch(() => { $('whoMsg').textContent = 'Couldn\'t load the crew list. Refresh to try again.'; $('whoMsg').className = 'msg bad'; });
 })();
