@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Crew Papers · A Dead Man's Chest</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sea:#0f1d24; --sea2:#172b34; --ink:#2b1d12; --parch:#f3e6c8; --parch2:#e8d5a8;
+  --rust:#9b2f1d; --rust2:#7d2414; --gold:#c99a3b; --muted:#6d5a43; --line:#cdb787;
+  --ok:#2f6b3a; --bad:#a0261a;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background:radial-gradient(1200px 600px at 50% -10%, #24414d 0%, var(--sea) 60%) fixed, var(--sea);
+  color:var(--ink); font:16px/1.5 "Source Sans 3", system-ui, sans-serif; min-height:100vh;
+}
+.wrap{max-width:860px;margin:0 auto;padding:28px 16px 64px}
+header.top{text-align:center;color:var(--parch);margin:8px 0 22px}
+header.top .kicker{font:600 12px/1 "Source Sans 3";letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+header.top h1{font:400 clamp(34px,7vw,52px)/1.05 "IM Fell English", Georgia, serif;margin:10px 0 6px}
+header.top p{margin:0;color:#c9d6d9;font-size:15px}
+.card{
+  background:linear-gradient(180deg,var(--parch),var(--parch2));border-radius:14px;padding:24px 22px;
+  box-shadow:0 18px 50px rgba(0,0,0,.45), inset 0 0 0 1px rgba(120,90,40,.25);
+}
+.card + .card{margin-top:16px}
+h2{font:400 26px/1.15 "IM Fell English", Georgia, serif;margin:0 0 4px}
+.sub{color:var(--muted);margin:0 0 16px}
+label{display:block;font-weight:700;margin:0 0 6px}
+input[type=text]{
+  width:100%;font:inherit;font-size:18px;padding:12px 14px;border-radius:10px;border:1.5px solid var(--line);
+  background:#fffaf0;color:var(--ink);outline:none;
+}
+input[type=text]:focus{border-color:var(--rust);box-shadow:0 0 0 3px rgba(155,47,29,.15)}
+input.code{letter-spacing:.18em;text-transform:uppercase;font-weight:700}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;font:700 16px "Source Sans 3";
+  background:var(--rust);color:#fff6e6;border:0;border-radius:10px;padding:12px 18px;cursor:pointer;min-height:46px;
+}
+.btn:hover{background:var(--rust2)} .btn:disabled{opacity:.6;cursor:wait}
+.btn.ghost{background:transparent;color:var(--rust);border:1.5px solid var(--rust)}
+.btn.ghost:hover{background:rgba(155,47,29,.08)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:14px}
+.matches{display:grid;gap:8px;margin-top:12px}
+.match{
+  text-align:left;font:inherit;background:#fffaf0;border:1.5px solid var(--line);border-radius:10px;
+  padding:10px 14px;cursor:pointer;color:var(--ink);
+}
+.match:hover,.match:focus{border-color:var(--rust);outline:none}
+.match b{display:block;font-size:17px}
+.match span{color:var(--muted);font-size:14px}
+.msg{margin-top:12px;font-weight:600;min-height:1.5em}
+.msg.bad{color:var(--bad)} .msg.ok{color:var(--ok)}
+.who{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap}
+.who .side{font:600 12px/1 "Source Sans 3";letter-spacing:.16em;text-transform:uppercase;color:var(--rust)}
+.who h2{margin-top:6px}
+.linkbtn{background:none;border:0;color:var(--rust);font:600 14px "Source Sans 3";cursor:pointer;text-decoration:underline;padding:4px 0}
+.tabs{display:flex;gap:6px;margin:18px 0 0;border-bottom:1.5px solid var(--line)}
+.tab{
+  font:700 15px "Source Sans 3";background:none;border:0;padding:10px 14px;cursor:pointer;color:var(--muted);
+  border-bottom:3px solid transparent;margin-bottom:-1.5px;
+}
+.tab[aria-selected=true]{color:var(--ink);border-bottom-color:var(--rust)}
+.panel{padding-top:18px}
+.lock{background:#fffaf0;border:1.5px dashed var(--line);border-radius:12px;padding:18px}
+.lock h3{font:400 22px "IM Fell English", Georgia, serif;margin:0 0 4px}
+.pages{display:grid;gap:18px}
+figure.page{margin:0}
+figure.page .frame{
+  background:#fff;border-radius:6px;box-shadow:0 4px 18px rgba(60,40,10,.25);overflow:hidden;
+  aspect-ratio:1275/1650;display:flex;align-items:center;justify-content:center;cursor:zoom-in;
+}
+figure.page img{width:100%;height:100%;object-fit:contain;display:block}
+figure.page figcaption{color:var(--muted);font-size:13px;text-align:center;margin-top:6px}
+.spinner{width:28px;height:28px;border-radius:50%;border:3px solid var(--line);border-top-color:var(--rust);animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.tip{font-size:14px;color:var(--muted);margin:0 0 14px}
+.zoom{position:fixed;inset:0;background:rgba(5,10,12,.94);z-index:50;overflow:auto;display:none;-webkit-overflow-scrolling:touch}
+.zoom.on{display:block}
+.zoom img{display:block;width:min(1275px,200vw);max-width:none;margin:0 auto}
+.zoom .close{position:fixed;top:12px;right:12px;z-index:51}
+footer{color:#8fa4aa;text-align:center;font-size:13px;margin-top:28px}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="kicker">Santo Oloroso · Crew papers</div>
+    <h1>A Dead Man's Chest</h1>
+    <p>Look up your character packet. Keep your secrets to yourself.</p>
+  </header>
+
+  <!-- Step 1: who -->
+  <section class="card" id="stepWho">
+    <h2>Who are you?</h2>
+    <p class="sub">Type your name or your character's name.</p>
+    <label for="whoInput" class="hidden">Name or character</label>
+    <input type="text" id="whoInput" autocomplete="off" placeholder="e.g. Danny, or Sawbones" aria-label="Your name or character">
+    <div class="matches" id="matches"></div>
+    <div class="msg" id="whoMsg"></div>
+  </section>
+
+  <!-- Step 2: code -->
+  <section class="card hidden" id="stepCode">
+    <div class="who">
+      <div>
+        <div class="side" id="cSide"></div>
+        <h2 id="cName"></h2>
+        <p class="sub" id="cLine"></p>
+      </div>
+      <button class="linkbtn" id="backBtn" type="button">Not you?</button>
+    </div>
+    <form id="codeForm">
+      <label for="codeInput">Your personal code</label>
+      <input type="text" id="codeInput" class="code" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="ABC-123">
+      <div class="row"><button class="btn" id="codeBtn" type="submit">Open my packet</button></div>
+      <div class="msg" id="codeMsg"></div>
+      <p class="tip">Anthony texted you your code. Lost it? Ask him.</p>
+    </form>
+  </section>
+
+  <!-- Step 3: viewer -->
+  <section class="card hidden" id="stepView">
+    <div class="who">
+      <div>
+        <div class="side" id="vSide"></div>
+        <h2 id="vName"></h2>
+        <p class="sub" id="vLine" style="margin:0"></p>
+      </div>
+      <button class="linkbtn" id="signOut" type="button">Sign out</button>
+    </div>
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" id="tabSa" aria-selected="true" aria-controls="panelSa">Before the party</button>
+      <button class="tab" role="tab" id="tabEnv" aria-selected="false" aria-controls="panelEnv">Your envelope</button>
+    </div>
+    <div class="panel" id="panelSa" role="tabpanel">
+      <p class="tip">Read this before the party. Tap a page to zoom in.</p>
+      <div class="pages" id="pagesSa"></div>
+    </div>
+    <div class="panel hidden" id="panelEnv" role="tabpanel">
+      <div class="lock hidden" id="envLock">
+        <h3>Sealed until the party</h3>
+        <p class="sub" style="margin-bottom:12px">Your envelope opens when the game starts. Anthony will announce the party word. Enter it here.</p>
+        <form id="envForm">
+          <label for="envInput">Party word</label>
+          <input type="text" id="envInput" class="code" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="WORD-WORD-00">
+          <div class="row"><button class="btn" id="envBtn" type="submit">Open my envelope</button></div>
+          <div class="msg" id="envMsg"></div>
+        </form>
+      </div>
+      <div id="envBody" class="hidden">
+        <p class="tip">Everything that was in your envelope. Tap a page to zoom in.</p>
+        <div class="pages" id="pagesEnv"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>A Dead Man's Chest © Freeform Games. Shared privately with our players only.</footer>
+</div>
+
+<div class="zoom" id="zoom" aria-hidden="true">
+  <button class="btn close" id="zoomClose" type="button">Close</button>
+  <img id="zoomImg" alt="">
+</div>
+
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const enc = new TextEncoder();
+  const norm = s => (s || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+  const fold = s => (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[‘’'`]/g, '').replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
+  const unb64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+  const store = {
+    get(){ try { return JSON.parse(localStorage.getItem('admc') || 'null'); } catch { return null; } },
+    set(v){ try { localStorage.setItem('admc', JSON.stringify(v)); } catch {} },
+    clear(){ try { localStorage.removeItem('admc'); } catch {} }
+  };
+
+  let INDEX = null, me = null, code = null, saKey = null, envKey = null;
+  const loaded = { sa: false, env: false };
+  const urls = [];
+
+  async function derive(secret, saltB64) {
+    const base = await crypto.subtle.importKey('raw', enc.encode(secret), 'PBKDF2', false, ['deriveKey']);
+    return crypto.subtle.deriveKey(
+      { name: 'PBKDF2', salt: unb64(saltB64), iterations: INDEX.iterations, hash: 'SHA-256' },
+      base, { name: 'AES-GCM', length: 256 }, false, ['decrypt']);
+  }
+  async function open(key, bytes) {
+    const b = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes);
+    return new Uint8Array(await crypto.subtle.decrypt({ name: 'AES-GCM', iv: b.slice(0, 12) }, key, b.slice(12)));
+  }
+  async function tryKey(secret, sec) {
+    const key = await derive(secret, sec.salt);
+    try {
+      const out = new TextDecoder().decode(await open(key, unb64(sec.check)));
+      return out === 'ahoy-matey' ? key : null;
+    } catch { return null; }
+  }
+
+  // ---------- step 1 ----------
+  function haystack(p) { return fold([p.player, p.character, p.aka].join(' ')); }
+  function renderMatches() {
+    const q = fold($('whoInput').value);
+    const box = $('matches'); box.innerHTML = ''; $('whoMsg').textContent = ''; $('whoMsg').className = 'msg';
+    if (!q) return;
+    const words = q.split(' ');
+    const hits = INDEX.players.filter(p => { const h = haystack(p); return words.every(w => h.includes(w)); });
+    if (!hits.length) { $('whoMsg').textContent = 'No one by that name on the guest list. Try your first name or your character.'; $('whoMsg').className = 'msg bad'; return; }
+    hits.slice(0, 8).forEach(p => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'match';
+      b.innerHTML = `<b></b><span></span>`;
+      b.querySelector('b').textContent = p.character;
+      b.querySelector('span').textContent = `played by ${p.player} · ${p.side}`;
+      b.onclick = () => pick(p);
+      box.appendChild(b);
+    });
+  }
+  function fillWho(p, pre) {
+    $(pre + 'Side').textContent = p.side;
+    $(pre + 'Name').textContent = p.character;
+    $(pre + 'Line').textContent = `${p.player}, you are ${p.tagline}.`;
+  }
+  function pick(p) {
+    me = p; fillWho(p, 'c');
+    show('stepCode'); $('codeInput').value = ''; $('codeMsg').textContent = '';
+    setTimeout(() => $('codeInput').focus(), 50);
+  }
+  function show(id) { ['stepWho', 'stepCode', 'stepView'].forEach(s => $(s).classList.toggle('hidden', s !== id)); }
+
+  // ---------- step 2 ----------
+  async function unlock(c, quiet) {
+    const btn = $('codeBtn'), msg = $('codeMsg');
+    btn.disabled = true; btn.textContent = 'Checking…'; msg.textContent = ''; msg.className = 'msg';
+    try {
+      const key = await tryKey(norm(c), me.sa);
+      if (!key) { if (!quiet) { msg.textContent = `That code doesn't match ${me.character}. Check the text from Anthony.`; msg.className = 'msg bad'; } return false; }
+      code = norm(c); saKey = key;
+      const saved = store.get() || {}; store.set({ num: me.num, code, party: saved.num === me.num ? saved.party : undefined });
+      enterViewer();
+      return true;
+    } finally { btn.disabled = false; btn.textContent = 'Open my packet'; }
+  }
+
+  // ---------- step 3 ----------
+  function enterViewer() {
+    fillWho(me, 'v'); show('stepView'); selectTab('sa');
+    $('envLock').classList.toggle('hidden', !INDEX.envelopeLocked);
+    $('envBody').classList.add('hidden');
+  }
+  function selectTab(which) {
+    $('tabSa').setAttribute('aria-selected', which === 'sa');
+    $('tabEnv').setAttribute('aria-selected', which === 'env');
+    $('panelSa').classList.toggle('hidden', which !== 'sa');
+    $('panelEnv').classList.toggle('hidden', which !== 'env');
+    if (which === 'sa' && !loaded.sa) { loaded.sa = true; loadPages(me.sa, saKey, $('pagesSa')); }
+    if (which === 'env') prepareEnvelope();
+  }
+  async function prepareEnvelope() {
+    if (envKey) return;
+    if (!INDEX.envelopeLocked) {
+      const k = await tryKey(code + '|envelope', me.env);
+      if (k) openEnvelope(k);
+      return;
+    }
+    const saved = store.get();
+    if (saved && saved.num === me.num && saved.party) {
+      const k = await tryKey(code + '|' + saved.party, me.env);
+      if (k) return openEnvelope(k);
+    }
+    $('envLock').classList.remove('hidden');
+  }
+  function openEnvelope(k) {
+    envKey = k; $('envLock').classList.add('hidden'); $('envBody').classList.remove('hidden');
+    if (!loaded.env) { loaded.env = true; loadPages(me.env, envKey, $('pagesEnv')); }
+  }
+  async function loadPages(sec, key, box) {
+    box.innerHTML = '';
+    const figs = [];
+    for (let i = 1; i <= sec.pages; i++) {
+      const f = document.createElement('figure'); f.className = 'page';
+      f.innerHTML = `<div class="frame"><div class="spinner" aria-label="Loading page"></div></div><figcaption>Page ${i} of ${sec.pages}</figcaption>`;
+      box.appendChild(f); figs.push(f);
+    }
+    let next = 0;
+    async function worker() {
+      while (next < sec.pages) {
+        const i = next++;
+        const frame = figs[i].querySelector('.frame');
+        try {
+          const r = await fetch(`data/${sec.dir}/${i + 1}.bin`, { cache: 'force-cache' });
+          if (!r.ok) throw new Error(r.status);
+          const plain = await open(key, await r.arrayBuffer());
+          const url = URL.createObjectURL(new Blob([plain], { type: 'image/webp' })); urls.push(url);
+          const img = new Image(); img.alt = `Page ${i + 1}`; img.src = url;
+          frame.innerHTML = ''; frame.appendChild(img);
+          frame.onclick = () => { $('zoomImg').src = url; $('zoom').classList.add('on'); $('zoom').scrollTo(0, 0); };
+        } catch (e) {
+          frame.innerHTML = '<span style="padding:20px;color:#a0261a;font-weight:600">Couldn\'t load this page. Refresh to try again.</span>';
+        }
+      }
+    }
+    await Promise.all([worker(), worker(), worker()]);
+  }
+  function signOut() {
+    store.clear(); me = code = saKey = envKey = null; loaded.sa = loaded.env = false;
+    urls.splice(0).forEach(u => URL.revokeObjectURL(u));
+    $('pagesSa').innerHTML = ''; $('pagesEnv').innerHTML = ''; $('whoInput').value = ''; $('matches').innerHTML = '';
+    show('stepWho'); $('whoInput').focus();
+  }
+
+  // ---------- wiring ----------
+  $('whoInput').addEventListener('input', renderMatches);
+  $('whoInput').addEventListener('keydown', e => { if (e.key === 'Enter') { const first = $('matches').querySelector('.match'); if (first) first.click(); } });
+  $('backBtn').onclick = () => { show('stepWho'); $('whoInput').focus(); };
+  $('codeForm').onsubmit = e => { e.preventDefault(); unlock($('codeInput').value); };
+  $('tabSa').onclick = () => selectTab('sa');
+  $('tabEnv').onclick = () => selectTab('env');
+  $('signOut').onclick = signOut;
+  $('envForm').onsubmit = async e => {
+    e.preventDefault();
+    const btn = $('envBtn'), msg = $('envMsg'), word = norm($('envInput').value);
+    btn.disabled = true; btn.textContent = 'Breaking the seal…'; msg.textContent = ''; msg.className = 'msg';
+    try {
+      const k = word ? await tryKey(code + '|' + word, me.env) : null;
+      if (!k) { msg.textContent = 'That isn\'t the party word. Wait for Anthony to announce it.'; msg.className = 'msg bad'; return; }
+      store.set({ num: me.num, code, party: word });
+      openEnvelope(k);
+    } finally { btn.disabled = false; btn.textContent = 'Open my envelope'; }
+  };
+  $('zoomClose').onclick = () => $('zoom').classList.remove('on');
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') $('zoom').classList.remove('on'); });
+
+  // ---------- boot ----------
+  fetch('data/index.json', { cache: 'no-cache' }).then(r => r.json()).then(async idx => {
+    INDEX = idx;
+    if (!window.crypto || !crypto.subtle) { $('whoMsg').textContent = 'This browser can\'t open the packets. Try Safari or Chrome.'; $('whoMsg').className = 'msg bad'; return; }
+    const saved = store.get();
+    const p = saved && INDEX.players.find(x => x.num === saved.num);
+    if (p && saved.code) { pick(p); $('codeInput').value = saved.code; if (await unlock(saved.code, true)) return; show('stepCode'); }
+    else $('whoInput').focus();
+  }).catch(() => { $('whoMsg').textContent = 'Couldn\'t load the crew list. Refresh to try again.'; $('whoMsg').className = 'msg bad'; });
+})();
+</script>
+</body>
+</html>

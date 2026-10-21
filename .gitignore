@@ -1,0 +1,6 @@
+codes*.json
+partyword*
+*.pdf
+*.xlsx
+__pycache__/
+.DS_Store

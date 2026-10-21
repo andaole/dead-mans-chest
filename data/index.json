@@ -1,0 +1,535 @@
+{
+ "version": 1,
+ "iterations": 400000,
+ "envelopeLocked": true,
+ "players": [
+  {
+   "num": "01",
+   "player": "David",
+   "character": "Captain ‘Black’ Jack McCracken",
+   "aka": "Black Jack",
+   "tagline": "the dashing Captain of the Scurvy Knave",
+   "side": "The Scurvy Knave",
+   "sa": {
+    "title": "Your packet",
+    "salt": "707GB8t2RPfzhfgW7CUv8g==",
+    "check": "3vRYPbRFTGLrRpeKvvtuEaExsNQdkGJA5Hk58cSxcfmpu0Ed6iU=",
+    "dir": "b2375c8f4af74830",
+    "pages": 13
+   },
+   "env": {
+    "title": "Your envelope",
+    "salt": "OkWeyBdwpzrYw2W1fgzriQ==",
+    "check": "4ajCfPTHRxHRwAU2fZ+9lZGkdVV2wVaayhzUdzRXUnw3UO7Y0lo=",
+    "dir": "0c57ea6f283f6156",
+    "pages": 2
+   }
+  },
+  {
+   "num": "02",
+   "player": "Danny",
+   "character": "Sawbones McGraw",
+   "aka": "Sawbones",
+   "tagline": "the sarcastic but reliable ship’s doctor",
+   "side": "The Scurvy Knave",
+   "sa": {
+    "title": "Your packet",
+    "salt": "+ie0leZufMF+vopSuXKTyQ==",
+    "check": "50qqNyQ9KoTnSp/Ftxc7JNSAqvUAmPG74AtTyGzpjasKjIsc6Xs=",
+    "dir": "ea00aeafc3f79456",
+    "pages": 12
+   },
+   "env": {
+    "title": "Your envelope",
+    "salt": "5FjLBXHuQvXU+pyFjZT5bA==",
+    "check": "W+0/oENcWObDgnktNfbYm6jl8wJBMJCHf8nuA+M+x0bj2Se6BII=",
+    "dir": "85af4f6d23b70246",
+    "pages": 3
+   }
+  },
+  {
+   "num": "03",
+   "player": "Alex (Improv)",
+   "character": "Quintus Swelter",
+   "aka": "Swelter",
+   "tagline": "the vain and sinister ship’s cook",
+   "side": "The Scurvy Knave",
+   "sa": {
+    "title": "Your packet",
+    "salt": "OuRLo4Qc9v3qBvkyG2uHFQ==",
+    "check": "F+d6IPwhgHBMBHzMKfmbq1DECSfioBgxNwBqVLy/qeVfcRboAnA=",
+    "dir": "b934dddb5400ec50",
+    "pages": 13
+   },
+   "env": {
+    "title": "Your envelope",
+    "salt": "+EPC4yY08386yLXUjpxo8A==",
+    "check": "rCFYLRjh2OrRVWOj6DVgN8xiXhlDNLX0w1y5vIvY7aVCeDfXI+4=",
+    "dir": "38f11466969ce52d",
+    "pages": 2
+   }
+  },
+  {
+   "num": "04",
+   "player": "Morgan",
+   "character": "‘Tom’",
+   "aka": "Tom",
+   "tagline": "the helpful young ship’s boy",
+   "side": "The Scurvy Knave",
+   "sa": {
+    "title": "Your packet",
+    "salt": "wMm32fjssYeNWldkOcvb9A==",
+    "check": "4eFdyez1SeyZxJy5HBRGKAbfSyptpjM7fBzSe6+4Wpl5/oR8eLo=",
+    "dir": "6c839aa22527ffaa",
+    "pages": 13
+   },
+   "env": {
+    "title": "Your envelope",
+    "salt": "QGG6INjJujA0KMiKWaYvnw==",
+    "check": "0BVcUx7+NskOGD8fxl1V706c3TaRpmxZq9++2MpOmqMJ7lxCRGc=",
+    "dir": "9af30a45cba2cbe0",
+    "pages": 2
+   }
+  },
+  {
+   "num": "06",
+   "player": "John",
+   "character": "Louis de Monnaie",
+   "aka": "Louis",
+   "tagline": "a lazy French deckhand on the Scurvy Knave",
+   "side": "The Scurvy Knave",
+   "sa": {
+    "title": "Your packet",
+    "salt": "kOdzGUhtZshO3Nn5MXWvgw==",
+    "check": "BehR+uUCfGPM7llEYTfvku5ICPY719RlKdelW3XKiQnvGSKqDmo=",
+    "dir": "48ed19b94ba08cd1",
+    "pages": 10
+   },
+   "env": {
+    "title": "Your envelope",
+    "salt": "wIiO5ywcB381pkDY8CRhPg==",
+    "check": "fxyYXEuQgL9xXk4yQjHRhaBxxt5qa5UMNkgeXUlVx4cRJNHBmUM=",
+    "dir": "c36dff2fcc42148c",
+    "pages": 1
+   }
+  },
+  {
+   "num": "07",
+   "player": "Karen",
+   "character": "Captain ‘Saucy’ Nancy Martin",
+   "aka": "Saucy Nancy",
+   "tagline": "the bold and fiery Captain of the Fury",
+   "side": "The Fury",
+   "sa": {
+    "title": "Your packet",
+    "salt": "w7/+uSNi0VUf328g1pqCmw==",
+    "check": "sG9uTsPAHXTnKZoDLQdjrtwuXAbUcQvWEyk23rjPjden9u524MM=",
+    "dir": "5b3053ffa03fcce3",
+    "pages": 13
+   },
+   "env": {
+    "title": "Your envelope",
+    "salt": "bmJtZBpMapGAKQyB/S0eSw==",
+    "check": "FbRjMtaL6+/wp5MTqEpXXlj56OQhxpR8HV73RC3joWd6doK9Hyk=",
+    "dir": "def1cab439af67d4",
+    "pages": 2
+   }
+  },
+  {
+   "num": "08",
+   "player": "Caitlin",
+   "character": "Alice Tremain",
+   "aka": "Alice",
+   "tagline": "the Fury’s shrewd and intellectual first mate",
+   "side": "The Fury",
+   "sa": {
+    "title": "Your packet",
+    "salt": "Yhwuh1xfyRKO5Q3QOGhejw==",
+    "check": "rpgZV3wKWD3PBTswnnjeh7ZeMR1G96vEphoLMAN/SNXwWjgDSmw=",
+    "dir": "e271ce0b07db7f4d",
+    "pages": 13
+   },
+   "env": {
+    "title": "Your envelope",
+    "salt": "A0yl6M3azxsT9gtYbNog+w==",
+    "check": "3Wt9BODhfkJwQifdQXb1Y9Vaj1jI28jHZ4O70mqaBNEjFJeUtQ8=",
+    "dir": "66fd04fd13b1ab89",
+    "pages": 2
+   }
+  },
+  {
+   "num": "09",
+   "player": "Mark",
+   "character": "Blaise Richelieu",
+   "aka": "Blaise",
+   "tagline": "the temperamental and passionate ship’s cook of the Fury",
+   "side": "The Fury",
+   "sa": {
+    "title": "Your packet",
+    "salt": "F9vYt3SFDhYRL0gdhqWS0A==",
+    "check": "sGwfAj01FyLzRxP3Mndjksld1ofsek7ga6jqowJfui+SvPy26Y4=",
+    "dir": "e73087fcd265c602",
+    "pages": 13
+   },
+   "env": {
+    "title": "Your envelope",
+    "salt": "0xSY5vgj0PcwHsCmLDEFZw==",
+    "check": "3f+8sCAMUNmaC1qDYagl7XtYLkMr4eVyjn+3cYosRzp6H6VwrTs=",
+    "dir": "cb20a9b7bfd1212b",
+    "pages": 2
+   }
+  },
+  {
+   "num": "10",
+   "player": "Dan Ho",
+   "character": "Rose",
+   "aka": "Rose",
+   "tagline": "Ship’s Girl of the Fury",
+   "side": "The Fury",
+   "sa": {
+    "title": "Your packet",
+    "salt": "JQQ1xQrhHWAp+E5+BPeyOg==",
+    "check": "DHqlY/KuuCvyWVyr1YnIl/EbyI33x65xEsMuMU1jAwRcKs9NB64=",
+    "dir": "b212d8696adf22f2",
+    "pages": 9
+   },
+   "env": {
+    "title": "Your envelope",
+    "salt": "GloQcCGYGJPq78ZWLpdqgg==",
+    "check": "F3gMg++q1aG6rDclm2kU8mWvkkUy2Bjm5py+lGIomV2lEln3zDc=",
+    "dir": "94646e227ea9a594",
+    "pages": 3
+   }
+  },
+  {
+   "num": "11",
+   "player": "Fawn",
+   "character": "Grace Cooper",
+   "aka": "Grace",
+   "tagline": "an energetic young pirate of the Fury",
+   "side": "The Fury",
+   "sa": {
+    "title": "Your packet",
+    "salt": "Th8F6wtEcIaNtwSdgBEYCw==",
+    "check": "doV6ggc0IMXWoq4ER3QHK09zrNCwGY4uIXiedYzu3vL2yEKCkbo=",
+    "dir": "21d1457b7c07d6a7",
+    "pages": 10
+   },
+   "env": {
+    "title": "Your envelope",
+    "salt": "HSuGWbrFhqWDf8p0FPjdzg==",
+    "check": "vALmJkpp6qUWnQsBuVMZ76b6+t3ycoHGXx9S9iMFZosQ9apj//M=",
+    "dir": "daffbacdb903d7ba",
+    "pages": 3
+   }
+  },
+  {
+   "num": "12",
+   "player": "Shubhanga",
+   "character": "Shay Collins",
+   "aka": "Shay",
+   "tagline": "a pirate of the Fury, loyal with an odd sense of humour",
+   "side": "The Fury",
+   "sa": {
+    "title": "Your packet",
+    "salt": "iiIMa0fu4J6kDFXFuZg7MA==",
+    "check": "RgHXAVvMb4qgp9BwDABCxVSofiW27yICUhDFbegEmSqhMYaVuBk=",
+    "dir": "eab7dfcc0d70dc79",
+    "pages": 10
+   },
+   "env": {
+    "title": "Your envelope",
+    "salt": "0v1f17Ml/7xQ4NF45xQhCA==",
+    "check": "khP3BpvOdMJHfbXZU0oKDUzu72gu9cKOwpT7RbHm7PnX3SFF+6M=",
+    "dir": "3a89daf8b6e4ced1",
+    "pages": 3
+   }
+  },
+  {
+   "num": "13",
+   "player": "John Dompor",
+   "character": "Sir Percival Stanforth",
+   "aka": "Percival",
+   "tagline": "the steadfast and rather stuffy Governor of Jamaica",
+   "side": "Colonial forces",
+   "sa": {
+    "title": "Your packet",
+    "salt": "OjS7zp/ZN65Z5g2+mureiQ==",
+    "check": "bv4L/xN79Ev+e4Jt6EObIQU4Ajrmna/4NJ1NzNsNnHc6o8iD5/M=",
+    "dir": "3929d06212290e30",
+    "pages": 13
+   },
+   "env": {
+    "title": "Your envelope",
+    "salt": "KhagHopnyn15D4wIXVRMpg==",
+    "check": "KoVCrnwb1sEHkzLgl1aVz7CkRE0ZERU1Xa3BY4VdiyfEWDr43oo=",
+    "dir": "4ddb37e8b31e7c89",
+    "pages": 4
+   }
+  },
+  {
+   "num": "14",
+   "player": "Diana",
+   "character": "Elizabeth Stanforth",
+   "aka": "Elizabeth",
+   "tagline": "the Governor’s desirable (if demanding) elder daughter",
+   "side": "Colonial forces",
+   "sa": {
+    "title": "Your packet",
+    "salt": "ICRQ6pCFG6Zx/uTwxTWrug==",
+    "check": "vr9ACt+VKrV1DSDrxeJVXbwjzqg4nNc7iK3aKYodjEz8jekZVLk=",
+    "dir": "6bb71d6e47e9c3de",
+    "pages": 13
+   },
+   "env": {
+    "title": "Your envelope",
+    "salt": "/Mrt3a2nZiuvpuMSQiqiIQ==",
+    "check": "jNNZNWUsLAggZkJYQAYOHU0iOl9so8w9HRDr8PW2xQUpQYUSEos=",
+    "dir": "09dca3bf7178da45",
+    "pages": 2
+   }
+  },
+  {
+   "num": "15",
+   "player": "Courtney",
+   "character": "Wynn Harcourt",
+   "aka": "Wynn",
+   "tagline": "the Governor’s private secretary",
+   "side": "Colonial forces",
+   "sa": {
+    "title": "Your packet",
+    "salt": "XO/aXvsr2njX1al9mhzqMA==",
+    "check": "OBOM//W9XxVqgralaHWDbI7VQMd4ClG84gR+QDj0K5v4xC/Iap8=",
+    "dir": "e61c4fad22471318",
+    "pages": 9
+   },
+   "env": {
+    "title": "Your envelope",
+    "salt": "TPAr1NLhYDLM7ZPEz4ncAg==",
+    "check": "eDw/LKrmHfdqe9veaLFeQZtMQzQiyiz8XWgO86p7j9m7gsLjE/c=",
+    "dir": "b390fa54ccd7df21",
+    "pages": 3
+   }
+  },
+  {
+   "num": "16",
+   "player": "Alvaro",
+   "character": "Captain Hal Overy",
+   "aka": "Overy",
+   "tagline": "the stubborn and blunt Royal Navy captain",
+   "side": "Royal Navy",
+   "sa": {
+    "title": "Your packet",
+    "salt": "HwS37YLtm2tEr/E7EkFKYg==",
+    "check": "xl1e1cshmVv4g5g0QzkL6qawPJyiAZIxs5aoVZjFfxJezS3AInI=",
+    "dir": "323c0465b4f16dea",
+    "pages": 13
+   },
+   "env": {
+    "title": "Your envelope",
+    "salt": "HXlRlXnqyXJJXVNQ0O2tBg==",
+    "check": "ju0GbKJLwWU2AyzJuZW7SsTpO4duk2b6gxerC9vf+vOkCigqk7g=",
+    "dir": "9974f1b528a17d80",
+    "pages": 2
+   }
+  },
+  {
+   "num": "17",
+   "player": "Boom",
+   "character": "Captain Rafa Ortega",
+   "aka": "Ortega",
+   "tagline": "master of Don Inigo’s wrecked ship, the Santa Clara",
+   "side": "The Spanish",
+   "sa": {
+    "title": "Your packet",
+    "salt": "xSTz3lC8wBoMtbgif3RdXA==",
+    "check": "3uoawhpr5mjHc9IEh4fwpMfFgl8s4BKylCR9MIuCTw3/VVJeS9c=",
+    "dir": "053ebd25300827f3",
+    "pages": 9
+   },
+   "env": {
+    "title": "Your envelope",
+    "salt": "3I7mD9go4JGjuyxFZ9iobg==",
+    "check": "D5GwKZn+Kymj+RGvHrQIB3h2ZlJhQDUGVmYc61t7EvKMpXKnYec=",
+    "dir": "c78df91999818da3",
+    "pages": 3
+   }
+  },
+  {
+   "num": "18",
+   "player": "Alex (Anthony’s)",
+   "character": "Hayapitl",
+   "aka": "Hayapitl",
+   "tagline": "the diplomatic Diaho chief",
+   "side": "The Diaho",
+   "sa": {
+    "title": "Your packet",
+    "salt": "j8pQMLYeEc0TknLDkNavVw==",
+    "check": "pwoLMCpX7JBrkQ9ekomwfWlpgJr8f+LbUDyiovxbm498Cgl0/K8=",
+    "dir": "735f33d8dd2f3573",
+    "pages": 13
+   },
+   "env": {
+    "title": "Your envelope",
+    "salt": "ac/IoL8lgu/qGm74rkLftg==",
+    "check": "1nraVP0UyBKJFx6+S48xytjDidxLBLTXc5FCXsNFdpYbFfdw1OY=",
+    "dir": "502edfc352a2a289",
+    "pages": 2
+   }
+  },
+  {
+   "num": "19",
+   "player": "Nancy",
+   "character": "Cassinga",
+   "aka": "Cassinga",
+   "tagline": "the intimidating Diaho shaman",
+   "side": "The Diaho",
+   "sa": {
+    "title": "Your packet",
+    "salt": "OrHimL6TXEfUMVCT1L2tsg==",
+    "check": "5LOlFXQwxj5nOaBfNYxM6/FZENHtOeNR0dc+qogLZR+y7AgjPEs=",
+    "dir": "0655b470e96c1651",
+    "pages": 13
+   },
+   "env": {
+    "title": "Your envelope",
+    "salt": "9S2nn2xpTVwdOg/7UarCiw==",
+    "check": "f1tX9eHBFDtjOeCay2QMi7GU7A38Ctw8aZbU81LZ1Od353w+BbY=",
+    "dir": "76013de926489c5d",
+    "pages": 2
+   }
+  },
+  {
+   "num": "20",
+   "player": "Justina",
+   "character": "Tokeleth",
+   "aka": "Tokeleth",
+   "tagline": "the chief’s headstrong daughter",
+   "side": "The Diaho",
+   "sa": {
+    "title": "Your packet",
+    "salt": "s7McybhPn2OSu9xqeNZi8w==",
+    "check": "7FnvoUTY7EcCbJDwCmoiVi3YoumdONpjGQfsdq/Q05YtkZ43Lb0=",
+    "dir": "ba014827d7b082a0",
+    "pages": 12
+   },
+   "env": {
+    "title": "Your envelope",
+    "salt": "GkYxjQaDdiTCy5F3JVD3AA==",
+    "check": "QG11ikStdOR+NFnhRgFxLwXthgxtIHYwfAsVEuGTNqyRGVHLxaw=",
+    "dir": "87ed1ff24edf1c7c",
+    "pages": 2
+   }
+  },
+  {
+   "num": "21",
+   "player": "Jose",
+   "character": "Don Inigo de Velez y Contrera",
+   "aka": "Don Inigo",
+   "tagline": "the aristocratic and condescending Spanish nobleman",
+   "side": "The Spanish",
+   "sa": {
+    "title": "Your packet",
+    "salt": "oMmzfi6D81J2PmPAYQnBGw==",
+    "check": "fLbDiZgH1SeKlKGCLIeA3R4lt94eVZu48T+OLIJnUzg+4gTHpN0=",
+    "dir": "9dbd606e6d680356",
+    "pages": 12
+   },
+   "env": {
+    "title": "Your envelope",
+    "salt": "XfhdNydrFOqF2qZrkFwYdg==",
+    "check": "SPJjFgNQGf8sA/IltTkXvQ3qCqeXfCxupvnPejFYFYL+p52DxUo=",
+    "dir": "48957f3d28559e2b",
+    "pages": 2
+   }
+  },
+  {
+   "num": "22",
+   "player": "Vy",
+   "character": "Salamanca",
+   "aka": "Salamanca",
+   "tagline": "the Don’s cynical and easily amused valet",
+   "side": "The Spanish",
+   "sa": {
+    "title": "Your packet",
+    "salt": "qRkr1pr5P6RuUEiLy2anKA==",
+    "check": "c8G908voaZnYLYbc+tgFlFCXFfAIEpQtUX5gUrU3fmO/8ONdMdM=",
+    "dir": "15f40795f0abfde8",
+    "pages": 13
+   },
+   "env": {
+    "title": "Your envelope",
+    "salt": "V8sBPVNuXaGQrlFsPQ7mZg==",
+    "check": "QE4Sci9m1qDoAj3MUCo/FD3g1lHrzRUh6hAiswA+zQhSdhTAfJc=",
+    "dir": "7bdf83a8444995e6",
+    "pages": 2
+   }
+  },
+  {
+   "num": "23",
+   "player": "Barak",
+   "character": "Bill Pistol",
+   "aka": "Bill Pistol",
+   "tagline": "the marooned former pirate, now as mad as a brush",
+   "side": "Independent",
+   "sa": {
+    "title": "Your packet",
+    "salt": "jLrm+PLwKURu8IPM5UcPrA==",
+    "check": "Q5lnc4yX4nf4YK5VHdcKHYEvbHA0u7z1s7ft49F8Ll+NJAQ11VM=",
+    "dir": "76f3679248b52c4b",
+    "pages": 12
+   },
+   "env": {
+    "title": "Your envelope",
+    "salt": "wHxs6siBXAu/yoDLdmxYNw==",
+    "check": "uBdXcAK2KsBDAT0buen2SH1Vgxbyxx4FFneq6u/FCxMdvGuFVi4=",
+    "dir": "14344bd348786d60",
+    "pages": 2
+   }
+  },
+  {
+   "num": "24",
+   "player": "Lawrence",
+   "character": "Jay Sommer",
+   "aka": "Jay",
+   "tagline": "a stowaway aboard the Scurvy Knave",
+   "side": "Independent",
+   "sa": {
+    "title": "Your packet",
+    "salt": "X9vab0p/1d9q8kM4mW3YfA==",
+    "check": "aoHvIxFkRkpharx2TVfay5EO0F2B131+jZNGA76uvNnCXKSqeVU=",
+    "dir": "aac18cfccf4826ba",
+    "pages": 9
+   },
+   "env": {
+    "title": "Your envelope",
+    "salt": "aoEkE3IP5ShPxnhhAQLh3g==",
+    "check": "IBPi6YpLy+tAr3Qr9j0ccXxfln/u84JvjcM75hnKaZJAnOGDmeM=",
+    "dir": "897377a2e1b9b63e",
+    "pages": 3
+   }
+  },
+  {
+   "num": "26",
+   "player": "Matt",
+   "character": "Reverend Ian Plumpton",
+   "aka": "Plumpton",
+   "tagline": "a Christian missionary",
+   "side": "The island",
+   "sa": {
+    "title": "Your packet",
+    "salt": "08uqSifcjxYaQyyMIn9caw==",
+    "check": "B+SmiOozBokMksTDXrQMi6nxfE2Eccq82jnE1KMMnxwZMLfbSOc=",
+    "dir": "8ea65d03a0dc8e33",
+    "pages": 10
+   },
+   "env": {
+    "title": "Your envelope",
+    "salt": "DaWIkdisHA5//6aX2DcEEg==",
+    "check": "KoWIU0uXkX3GgAIZdDoGHvJbjfcrem3sCtwEaXeFhZQ3DNqb2Mo=",
+    "dir": "2a6f637862209d88",
+    "pages": 3
+   }
+  }
+ ]
+}
