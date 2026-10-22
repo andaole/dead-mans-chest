@@ -123,10 +123,10 @@ footer{color:#8fa4aa;text-align:center;font-size:13px;margin-top:28px}
     </div>
     <form id="codeForm">
       <label for="codeInput">Password</label>
-      <input type="text" id="codeInput" class="code" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="From Anthony's text">
+      <input type="text" id="codeInput" class="code" inputmode="numeric" autocomplete="off" spellcheck="false" placeholder="Your number, e.g. 07">
       <div class="row"><button class="btn" id="codeBtn" type="submit">Open my packet</button></div>
       <div class="msg" id="codeMsg"></div>
-      <p class="tip">Use the password from Anthony's text. Lost it? Ask him.</p>
+      <p class="tip">It's the number at the front of the packet file Anthony sent you. Not sure? Ask him.</p>
     </form>
   </section>
 
@@ -192,8 +192,8 @@ footer{color:#8fa4aa;text-align:center;font-size:13px;margin-top:28px}
   const enc = new TextEncoder();
   const norm = s => (s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase().replace(/[^A-Z0-9]/g, '');
   const fold = s => (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[‘’'`]/g, '').replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
-  // The password is the player's first name; the full display name ("John Dompor", "Alex J.") also works.
-  const secretFor = (s, p) => { const n = norm(s); return n === norm(p.player) ? norm(p.player.split(' ')[0]) : n; };
+  // Password = the player's packet number ("7" and "07" both work).
+  const secretFor = (s, p) => { const n = norm(s); return /^[0-9]+$/.test(n) ? String(parseInt(n, 10)).padStart(2, '0') : n; };
   const unb64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
   const store = {
     get(){ try { return JSON.parse(localStorage.getItem('admc') || 'null'); } catch { return null; } },

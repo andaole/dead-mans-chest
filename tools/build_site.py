@@ -11,8 +11,7 @@ Usage:
       --codes ../codes.json [--party-word KRAKEN-RUM-7342 | --no-envelope-lock]
 
   --packets  folder holding 1_Send_ahead/ and 2_Envelopes/ (files start "NN ")
-  --codes    JSON file {"01": "David", ...}: each player's password (default:
-             their first name). Missing entries are filled in and written back.
+  --codes    JSON file {"01": "01", ...}: each player's password (their packet number).
 
 Needs: poppler-utils (pdftoppm), Pillow, cryptography.
 """
@@ -28,6 +27,13 @@ DATA = os.path.join(ROOT, "data")
 
 ITER = 400_000
 CACHE = os.path.join(ROOT, ".render_cache")   # plaintext page renders (gitignored)
+CHECK = b"ahoy-matey"
+MAX_W = 1275          # 150 dpi letter width
+QUALITY = 72
+# Envelope pages players should NOT see (1-based). Page 1 of every envelope is the
+# host's "PUT IN THIS ENVELOPE" assembly sheet; Ortega's page 5 is host slips for others.
+ENV_SKIP_ALL = {1}
+ENV_SKIP = {"17": {5}}
 
 
 def norm(s):
@@ -105,10 +111,11 @@ def main():
 
     cast = json.load(open(os.path.join(HERE, "cast.json"), encoding="utf-8"))
     codes = json.load(open(a.codes)) if os.path.exists(a.codes) else {}
-    # The password is the player's first name ("Alex J." -> "Alex"). index.html also
-    # accepts the full display name. Override per player in the codes file if needed.
+    # Each player's password is their packet number ("01".."26"), the number on the
+    # files Anthony sent them. The "is this you?" pop-up keeps people to their own packet.
     for c in cast:
-        codes.setdefault(c["num"], c["player"].split(" ")[0])
+        if c["num"] not in codes:
+            sys.exit(f"No password for {c['num']} {c['player']} in {a.codes}")
     json.dump(codes, open(a.codes, "w"), indent=2)
 
     party = None if a.no_envelope_lock else norm(a.party_word)

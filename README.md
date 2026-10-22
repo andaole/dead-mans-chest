@@ -5,7 +5,7 @@ A small static site where each player at our *A Dead Man's Chest* murder mystery
 
 1. A player types their name or their character's name.
 2. A pop-up checks they picked themselves (each packet is for one player only).
-3. They enter the **password** from Anthony's text.
+3. They enter their **password**: the number on the packet file Anthony sent them.
 4. They see their **send-ahead packet** ("Before the party").
 5. Their **envelope** stays sealed until Anthony announces the **party word** at the game.
 
