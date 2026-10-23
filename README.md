@@ -8,6 +8,7 @@ A small static site where each player at our *A Dead Man's Chest* murder mystery
 3. They enter their **password**: the number on the packet file Anthony sent them.
 4. They see their **send-ahead packet** ("Before the party").
 5. Their **envelope** stays sealed until Anthony announces the **party word** at the game.
+6. The **Cards** tab (also unlocked by the party word) lists their abilities, Secret, Information and starting items. Each card has a full-screen **Show** button; abilities have **Use** buttons that tick off uses, with **Undo** and a timestamped activity log saved on that phone.
 
 ## Privacy
 
@@ -31,7 +32,8 @@ pip install pillow cryptography      # plus poppler-utils for pdftoppm
 python3 tools/build_site.py \
   --packets "/path/to/A_Dead_Mans_Chest/Packets" \
   --codes ../codes.json \
-  --party-word "THE-PARTY-WORD"      # or --no-envelope-lock to open envelopes now
+  --party-word "THE-PARTY-WORD" \   # or --no-envelope-lock to open envelopes now
+  --cards ../cards_data.json --card-images ../crops_jpg   # card text + item images, kept OUTSIDE the repo
 git add -A && git commit -m "Rebuild packets" && git push
 ```
 

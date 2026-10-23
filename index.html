@@ -96,6 +96,37 @@ footer{color:#8fa4aa;text-align:center;font-size:13px;margin-top:28px}
 .info li .ic{font-size:20px;line-height:1.3}
 .info li b{display:block}
 .info p.foot{margin:16px 0 0;font-weight:600}
+.cards-sec{margin-top:22px}
+.cards-sec:first-child{margin-top:0}
+.cards-sec h3{font:400 22px "IM Fell English", Georgia, serif;margin:0 0 2px}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin-top:10px}
+.pc{background:#fffaf0;border:1.5px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:6px}
+.pc .k{font:600 11px/1 "Source Sans 3";letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.pc .t{font:400 22px/1.1 "IM Fell English", Georgia, serif;color:var(--rust2)}
+.pc .b{font-size:15px;line-height:1.45;flex:1}
+.pc img{width:100%;border-radius:6px;display:block}
+.pc .uses{display:flex;align-items:center;gap:6px;font-weight:600;font-size:14px;color:var(--muted)}
+.dot{width:20px;height:20px;border-radius:50%;border:2px solid var(--rust);display:inline-block}
+.dot.on{background:var(--rust)}
+.pc.spent{opacity:.6}
+.acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.sbtn{font:700 14px "Source Sans 3";border-radius:9px;padding:9px 14px;border:1.5px solid var(--rust);background:var(--rust);color:#fff6e6;cursor:pointer;min-height:40px}
+.sbtn.alt{background:transparent;color:var(--rust)}
+.sbtn:disabled{opacity:.4;cursor:not-allowed}
+.note{background:#fff3d6;border:1.5px solid var(--gold);border-radius:10px;padding:10px 12px;font-weight:600;margin-top:8px}
+ol.log{margin:8px 0 0;padding-left:20px;font-size:14px;color:var(--ink)}
+ol.log li{margin:3px 0}
+ol.log li.undone{color:var(--muted);text-decoration:line-through}
+.showov{position:fixed;inset:0;z-index:70;background:#0f1d24;display:none;flex-direction:column;align-items:center;justify-content:center;padding:20px;overflow:auto}
+.showov.on{display:flex}
+.showov .bar{color:#c9d6d9;font-size:13px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px;text-align:center}
+.showov .pc{max-width:560px;width:100%;padding:24px}
+.showov .pc .t{font-size:38px}
+.showov .pc .b{font-size:21px}
+.showov .pc .k{font-size:13px}
+.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);width:min(420px,calc(100% - 32px));justify-content:space-between;z-index:80;background:#2b1d12;color:#fff6e6;border-radius:12px;padding:12px 14px;display:none;align-items:center;gap:12px;box-shadow:0 10px 30px rgba(0,0,0,.4);max-width:calc(100% - 32px)}
+.toast.on{display:flex}
+.toast button{background:none;border:1.5px solid #fff6e6;color:#fff6e6;border-radius:8px;padding:6px 10px;font:700 14px "Source Sans 3";cursor:pointer}
 .hidden{display:none!important}
 </style>
 </head>
@@ -148,13 +179,14 @@ footer{color:#8fa4aa;text-align:center;font-size:13px;margin-top:28px}
     </div>
     <div class="tabs" role="tablist">
       <button class="tab" role="tab" id="tabSa" aria-selected="true" aria-controls="panelSa">Before the party</button>
-      <button class="tab" role="tab" id="tabEnv" aria-selected="false" aria-controls="panelEnv">Your envelope</button>
+      <button class="tab" role="tab" id="tabEnv" aria-selected="false" aria-controls="panelEnv">Envelope</button>
+      <button class="tab" role="tab" id="tabCards" aria-selected="false" aria-controls="panelCards">Cards</button>
     </div>
     <div class="panel" id="panelSa" role="tabpanel">
       <p class="tip">Read this before the party. Tap a page to zoom in.</p>
       <div class="pages" id="pagesSa"></div>
     </div>
-    <div class="panel hidden" id="panelEnv" role="tabpanel">
+    <div class="panel hidden" id="lockWrap">
       <div class="lock hidden" id="envLock">
         <h3>Sealed until the party</h3>
         <p class="sub" style="margin-bottom:12px">Your envelope opens when the game starts. Anthony will announce the party word. Enter it here.</p>
@@ -165,10 +197,15 @@ footer{color:#8fa4aa;text-align:center;font-size:13px;margin-top:28px}
           <div class="msg" id="envMsg"></div>
         </form>
       </div>
+    </div>
+    <div class="panel hidden" id="panelEnv" role="tabpanel">
       <div id="envBody" class="hidden">
         <p class="tip">Everything that was in your envelope. Tap a page to zoom in.</p>
         <div class="pages" id="pagesEnv"></div>
       </div>
+    </div>
+    <div class="panel hidden" id="panelCards" role="tabpanel">
+      <div id="cardsBody"></div>
     </div>
   </section>
 
@@ -201,6 +238,12 @@ footer{color:#8fa4aa;text-align:center;font-size:13px;margin-top:28px}
   </div>
 </div>
 
+<div class="showov" id="showov" role="dialog" aria-modal="true" aria-label="Showing a card">
+  <div class="bar">Showing to another player · tap anywhere to close</div>
+  <div id="showCard"></div>
+</div>
+<div class="toast" id="toast" role="status"><span id="toastText"></span><button type="button" id="toastUndo">Undo</button></div>
+
 <div class="zoom" id="zoom" aria-hidden="true">
   <button class="btn close" id="zoomClose" type="button">Close</button>
   <img id="zoomImg" alt="">
@@ -221,8 +264,8 @@ footer{color:#8fa4aa;text-align:center;font-size:13px;margin-top:28px}
     clear(){ try { localStorage.removeItem('admc'); } catch {} }
   };
 
-  let INDEX = null, me = null, code = null, saKey = null, envKey = null;
-  const loaded = { sa: false, env: false };
+  let INDEX = null, me = null, code = null, saKey = null, envKey = null, tab = 'sa', CARDS = null;
+  const loaded = { sa: false, env: false, cards: false };
   const urls = [];
 
   async function derive(secret, saltB64) {
@@ -300,20 +343,21 @@ footer{color:#8fa4aa;text-align:center;font-size:13px;margin-top:28px}
 
   // ---------- step 3 ----------
   function enterViewer() {
-    fillWho(me, 'v'); show('stepView'); selectTab('sa');
-    $('envLock').classList.toggle('hidden', !INDEX.envelopeLocked);
-    $('envBody').classList.add('hidden');
+    fillWho(me, 'v'); show('stepView');
+    $('envLock').classList.add('hidden'); $('envBody').classList.add('hidden');
+    selectTab('sa');
   }
   function selectTab(which) {
-    $('tabSa').setAttribute('aria-selected', which === 'sa');
-    $('tabEnv').setAttribute('aria-selected', which === 'env');
-    $('panelSa').classList.toggle('hidden', which !== 'sa');
-    $('panelEnv').classList.toggle('hidden', which !== 'env');
+    tab = which;
+    [['sa', 'tabSa', 'panelSa'], ['env', 'tabEnv', 'panelEnv'], ['cards', 'tabCards', 'panelCards']].forEach(([w, t, p]) => {
+      $(t).setAttribute('aria-selected', which === w); $(p).classList.toggle('hidden', which !== w);
+    });
+    $('lockWrap').classList.toggle('hidden', which === 'sa' || !!envKey);
     if (which === 'sa' && !loaded.sa) { loaded.sa = true; loadPages(me.sa, saKey, $('pagesSa')); }
-    if (which === 'env') prepareEnvelope();
+    if (which !== 'sa') prepareEnvelope();
   }
   async function prepareEnvelope() {
-    if (envKey) return;
+    if (envKey) return afterUnlock();
     if (!INDEX.envelopeLocked) {
       const k = await tryKey(code + '|envelope', me.env);
       if (k) openEnvelope(k);
@@ -327,9 +371,103 @@ footer{color:#8fa4aa;text-align:center;font-size:13px;margin-top:28px}
     $('envLock').classList.remove('hidden');
   }
   function openEnvelope(k) {
-    envKey = k; $('envLock').classList.add('hidden'); $('envBody').classList.remove('hidden');
-    if (!loaded.env) { loaded.env = true; loadPages(me.env, envKey, $('pagesEnv')); }
+    envKey = k; $('envLock').classList.add('hidden'); $('lockWrap').classList.add('hidden'); $('envBody').classList.remove('hidden');
+    afterUnlock();
   }
+  function afterUnlock() {
+    if (tab === 'env' && !loaded.env) { loaded.env = true; loadPages(me.env, envKey, $('pagesEnv')); }
+    if (tab === 'cards' && !loaded.cards) { loaded.cards = true; loadCards(); }
+  }
+
+  // ---------- cards: show, use, undo ----------
+  const esc = t => String(t ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const stKey = () => 'admc-cards-' + me.num;
+  const loadSt = () => { try { return JSON.parse(localStorage.getItem(stKey()) || 'null') || { log: [] }; } catch { return { log: [] }; } };
+  let ST = { log: [] }, mem = {};
+  const saveSt = () => { mem[me.num] = ST; try { localStorage.setItem(stKey(), JSON.stringify(ST)); } catch {} };
+  const usedOf = i => ST.log.filter(e => e.i === i && !e.undone).length;
+  const hhmm = iso => new Date(iso).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+
+  async function loadCards() {
+    const box = $('cardsBody');
+    if (!me.env.cards) { box.innerHTML = '<p class="sub">No cards for this character.</p>'; return; }
+    box.innerHTML = '<div class="spinner" aria-label="Loading cards"></div>';
+    try {
+      const r = await fetch(`data/${me.env.dir}/cards.bin`, { cache: 'no-cache' });
+      if (!r.ok) throw new Error(r.status);
+      CARDS = JSON.parse(new TextDecoder().decode(await open(envKey, await r.arrayBuffer())));
+      ST = mem[me.num] || loadSt(); renderCards();
+    } catch (e) { box.innerHTML = '<p class="msg bad">Couldn\'t load your cards. Refresh to try again.</p>'; loaded.cards = false; }
+  }
+  function cardHtml(kind, title, body, extra = '') {
+    return `<div class="k">${esc(kind)}</div><div class="t">${esc(title)}</div>${body ? `<div class="b">${esc(body)}</div>` : ''}${extra}`;
+  }
+  function usesHtml(a, i) {
+    if (!a.uses) return '<div class="uses">Permanent ability · no need to track</div>';
+    const u = usedOf(i); let d = '';
+    for (let n = 0; n < a.uses; n++) d += `<span class="dot${n < u ? ' on' : ''}" aria-hidden="true"></span>`;
+    return `<div class="uses">${d}<span>${u} of ${a.uses} used</span></div>`;
+  }
+  function renderCards() {
+    const c = CARDS, who = me.character;
+    let h = '';
+    if (c.note) h += `<div class="note">${esc(c.note)}</div>`;
+    h += `<div class="cards-sec"><h3>Abilities</h3><p class="tip" style="margin:0">Tap <b>Use</b> each time you play one, and <b>Show</b> to show it to someone.</p><div class="cgrid">`;
+    c.abilities.forEach((a, i) => {
+      const left = a.uses ? a.uses - usedOf(i) : 1;
+      h += `<div class="pc${a.uses && !left ? ' spent' : ''}">${cardHtml(who + ' · Ability', a.title, a.body)}${usesHtml(a, i)}<div class="acts">`
+        + (a.uses ? `<button class="sbtn" data-use="${i}" ${left ? '' : 'disabled'}>Use</button><button class="sbtn alt" data-undo="${i}" ${usedOf(i) ? '' : 'disabled'}>Undo</button>` : '')
+        + `<button class="sbtn alt" data-show="a${i}">Show</button></div></div>`;
+    });
+    h += `</div></div><div class="cards-sec"><h3>Secret &amp; Information</h3><p class="tip" style="margin:0">Only show these when an ability makes you, or when you choose to.</p><div class="cgrid">`;
+    h += `<div class="pc">${cardHtml(who, 'Secret', c.secret)}<div class="acts"><button class="sbtn alt" data-show="s">Show</button></div></div>`;
+    h += `<div class="pc">${cardHtml(who, 'Information', c.information)}<div class="acts"><button class="sbtn alt" data-show="n">Show</button></div></div>`;
+    h += `</div></div>`;
+    if (c.items.length) {
+      h += `<div class="cards-sec"><h3>Starting items</h3><p class="tip" style="margin:0">Items are the printed cards in your envelope: whoever holds the card has the item. These are here for reference.</p><div class="cgrid">`;
+      c.items.forEach((it, i) => {
+        const inner = it.img ? `<div class="k">Item</div><img src="${it.img}" alt="${esc(it.title)}">` : cardHtml('Item' + (it.note ? ' · ' + it.note : ''), it.title, it.body);
+        h += `<div class="pc">${inner}<div class="acts"><button class="sbtn alt" data-show="i${i}">Show</button></div></div>`;
+      });
+      h += `</div></div>`;
+    }
+    const log = ST.log.slice().reverse();
+    h += `<div class="cards-sec"><h3>Activity</h3><p class="tip" style="margin:0">Saved on this phone only.</p>`
+      + (log.length ? `<ol class="log">${log.map(e => `<li class="${e.undone ? 'undone' : ''}">${hhmm(e.t)}: used ${esc(c.abilities[e.i].title)}${e.undone ? ` (undone ${hhmm(e.undone)})` : ''}</li>`).join('')}</ol>
+        <div class="acts"><button class="sbtn alt" id="undoLast" ${ST.log.some(e => !e.undone) ? '' : 'disabled'}>Undo last use</button></div>` : '<p class="sub" style="margin:6px 0 0">Nothing used yet.</p>')
+      + `</div>`;
+    $('cardsBody').innerHTML = h;
+  }
+  function useAbility(i) {
+    const a = CARDS.abilities[i];
+    if (!a.uses || usedOf(i) >= a.uses) return;
+    const e = { i, t: new Date().toISOString() }; ST.log.push(e); saveSt(); renderCards();
+    toast(`Used ${a.title} (${usedOf(i)} of ${a.uses})`, () => undoEntry(e));
+  }
+  function undoEntry(e) { if (e && !e.undone) { e.undone = new Date().toISOString(); saveSt(); renderCards(); hideToast(); } }
+  const lastOpen = i => ST.log.slice().reverse().find(e => !e.undone && (i === undefined || e.i === i));
+  let toastTimer = null;
+  function toast(text, undoFn) {
+    $('toastText').textContent = text; $('toastUndo').onclick = undoFn; $('toast').classList.add('on');
+    clearTimeout(toastTimer); toastTimer = setTimeout(hideToast, 6000);
+  }
+  function hideToast() { $('toast').classList.remove('on'); }
+  function showCard(ref) {
+    const c = CARDS, who = me.character; let inner = '';
+    if (ref[0] === 'a') { const i = +ref.slice(1), a = c.abilities[i]; inner = cardHtml(who + ' · Ability', a.title, a.body) + (a.uses ? `<div class="uses">${a.uses - usedOf(i)} of ${a.uses} uses left</div>` : '<div class="uses">Permanent ability</div>'); }
+    else if (ref === 's') inner = cardHtml(who, 'Secret', c.secret);
+    else if (ref === 'n') inner = cardHtml(who, 'Information', c.information);
+    else { const it = c.items[+ref.slice(1)]; inner = it.img ? `<div class="k">Item</div><img src="${it.img}" alt="${esc(it.title)}">` : cardHtml('Item', it.title, it.body); }
+    $('showCard').innerHTML = `<div class="pc">${inner}</div>`; $('showov').classList.add('on');
+  }
+  $('cardsBody').addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    if (b.dataset.use !== undefined) useAbility(+b.dataset.use);
+    else if (b.dataset.undo !== undefined) undoEntry(lastOpen(+b.dataset.undo));
+    else if (b.dataset.show !== undefined) showCard(b.dataset.show);
+    else if (b.id === 'undoLast') undoEntry(lastOpen());
+  });
+  $('showov').onclick = () => $('showov').classList.remove('on');
   async function loadPages(sec, key, box) {
     box.innerHTML = '';
     const figs = [];
@@ -359,7 +497,8 @@ footer{color:#8fa4aa;text-align:center;font-size:13px;margin-top:28px}
     await Promise.all([worker(), worker(), worker()]);
   }
   function signOut() {
-    store.clear(); me = code = saKey = envKey = null; loaded.sa = loaded.env = false;
+    store.clear(); me = code = saKey = envKey = CARDS = null; loaded.sa = loaded.env = loaded.cards = false; tab = 'sa';
+    $('cardsBody').innerHTML = ''; hideToast();
     urls.splice(0).forEach(u => URL.revokeObjectURL(u));
     $('pagesSa').innerHTML = ''; $('pagesEnv').innerHTML = ''; $('whoInput').value = ''; $('matches').innerHTML = '';
     show('stepWho'); $('whoInput').focus();
@@ -372,6 +511,7 @@ footer{color:#8fa4aa;text-align:center;font-size:13px;margin-top:28px}
   $('codeForm').onsubmit = e => { e.preventDefault(); unlock($('codeInput').value); };
   $('tabSa').onclick = () => selectTab('sa');
   $('tabEnv').onclick = () => selectTab('env');
+  $('tabCards').onclick = () => selectTab('cards');
   $('signOut').onclick = signOut;
   $('envForm').onsubmit = async e => {
     e.preventDefault();
@@ -386,7 +526,7 @@ footer{color:#8fa4aa;text-align:center;font-size:13px;margin-top:28px}
   };
   $('confirmNo').onclick = () => { $('confirm').classList.add('hidden'); show('stepWho'); $('whoInput').focus(); };
   $('zoomClose').onclick = () => $('zoom').classList.remove('on');
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') { $('zoom').classList.remove('on'); if (!$('confirm').classList.contains('hidden')) $('confirmNo').click(); } });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') { $('zoom').classList.remove('on'); $('showov').classList.remove('on'); if (!$('confirm').classList.contains('hidden')) $('confirmNo').click(); } });
 
   // ---------- boot ----------
   fetch('data/index.json', { cache: 'no-cache' }).then(r => r.json()).then(async idx => {

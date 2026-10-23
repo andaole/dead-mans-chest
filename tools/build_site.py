@@ -87,7 +87,8 @@ def render(pdf, skip=()):
         return out
 
 
-def section(pages, secret, title):
+def section(pages, secret, title, extra=None):
+    """Encrypt page images (and optional extra JSON, e.g. cards) under one key."""
     salt = secrets.token_bytes(16)
     key = derive(secret, salt)
     d = secrets.token_hex(8)
@@ -95,7 +96,22 @@ def section(pages, secret, title):
     for i, page in enumerate(pages, 1):
         with open(os.path.join(DATA, d, f"{i}.bin"), "wb") as fh:
             fh.write(seal(key, page))
-    return {"title": title, "salt": b64(salt), "check": b64(seal(key, CHECK)), "dir": d, "pages": len(pages)}
+    out = {"title": title, "salt": b64(salt), "check": b64(seal(key, CHECK)), "dir": d, "pages": len(pages)}
+    if extra is not None:
+        with open(os.path.join(DATA, d, "cards.bin"), "wb") as fh:
+            fh.write(seal(key, json.dumps(extra, ensure_ascii=False).encode()))
+        out["cards"] = True
+    return out
+
+
+def card_payload(c, img_dir):
+    """Inline item images (base64 JPEG) so the whole card set is one encrypted file."""
+    c = json.loads(json.dumps(c))
+    for it in c.get("items", []):
+        if it.get("img"):
+            path = os.path.join(img_dir, it["img"] + ".jpg")
+            it["img"] = "data:image/jpeg;base64," + b64(open(path, "rb").read())
+    return c
 
 
 def main():
@@ -105,6 +121,8 @@ def main():
     g = ap.add_mutually_exclusive_group(required=True)
     g.add_argument("--party-word")
     g.add_argument("--no-envelope-lock", action="store_true")
+    ap.add_argument("--cards", help="plaintext cards JSON kept OUTSIDE the repo (abilities, secret, info, items)")
+    ap.add_argument("--card-images", help="folder of item-card JPEGs named like the cards JSON 'img' fields")
     ap.add_argument("--envelopes-only", action="store_true",
                     help="re-render only the envelopes, keeping the existing send-ahead files")
     a = ap.parse_args()
@@ -132,6 +150,7 @@ def main():
             shutil.rmtree(DATA)
         os.makedirs(DATA)
 
+    cards = json.load(open(a.cards, encoding="utf-8")) if a.cards else {}
     players = []
     for c in cast:
         code = norm(codes[c["num"]])
@@ -143,7 +162,8 @@ def main():
             "aka": c["aka"], "tagline": c["tagline"], "side": c["side"],
             "sa": old[c["num"]]["sa"] if a.envelopes_only else
                   section(render(find_pdf(os.path.join(a.packets, "1_Send_ahead"), c["num"])), code, "Your packet"),
-            "env": section(env, env_secret, "Your envelope"),
+            "env": section(env, env_secret, "Your envelope",
+                           card_payload(cards[c["num"]], a.card_images) if c["num"] in cards else None),
         })
         print(f"{c['num']} {c['player']:<18} send-ahead {players[-1]['sa']['pages']:>2} pp, envelope {len(env)} pp")
 
