@@ -210,6 +210,32 @@ ol.log li.undone{color:var(--muted);text-decoration:line-through}
     </div>
   </section>
 
+  <!-- Host & co-host guide -->
+  <section class="card hidden" id="stepHost">
+    <div class="who">
+      <div>
+        <div class="side">Host &amp; co-host only</div>
+        <h2>The Quartermaster's guide</h2>
+        <p class="sub" style="margin:0">Run sheet, rules, the solution and every character. Players must not see this.</p>
+      </div>
+      <button class="linkbtn" id="hostBack" type="button">Back</button>
+    </div>
+    <form id="hostForm">
+      <label for="hostInput">Host password</label>
+      <input type="text" id="hostInput" class="code" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="Host password">
+      <div class="row"><button class="btn" id="hostBtn" type="submit">Open the guide</button></div>
+      <div class="msg" id="hostMsg"></div>
+    </form>
+    <div id="hostBody" class="hidden">
+      <div class="row" style="margin-top:0">
+        <button class="btn" id="hostPdf" type="button">Download the PDF</button>
+        <button class="btn ghost" id="hostLock" type="button">Lock this phone</button>
+      </div>
+      <p class="tip">The PDF is searchable and easier to print. Tap a page to zoom in.</p>
+      <div class="pages" id="pagesHost"></div>
+    </div>
+  </section>
+
   <section class="card info" id="partyInfo">
     <h2>Before you sail</h2>
     <p class="sub" style="margin:0">A Dead Man's Chest · Saturday, October 24</p>
@@ -224,7 +250,7 @@ ol.log li.undone{color:var(--muted);text-decoration:line-through}
     <p class="foot">See you on the island! 🦜</p>
   </section>
 
-  <footer>A Dead Man's Chest © Freeform Games. Shared privately with our players only.</footer>
+  <footer>A Dead Man's Chest © Freeform Games. Shared privately with our players only.<br><button class="linkbtn" id="hostOpen" type="button" style="margin-top:8px;font-size:13px">Host or co-host?</button></footer>
 </div>
 
 <div class="modal hidden" id="confirm" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
@@ -341,7 +367,56 @@ ol.log li.undone{color:var(--muted);text-decoration:line-through}
     $('confirm').classList.remove('hidden');
     setTimeout(() => $('confirmYes').focus(), 50);
   }
-  function show(id) { ['stepWho', 'stepCode', 'stepView'].forEach(s => $(s).classList.toggle('hidden', s !== id)); }
+  function show(id) {
+    ['stepWho', 'stepCode', 'stepView', 'stepHost'].forEach(s => $(s).classList.toggle('hidden', s !== id));
+    $('partyInfo').classList.toggle('hidden', id === 'stepHost');
+  }
+
+  // ---------- host & co-host guide ----------
+  const hostStore = {
+    get(){ try { return localStorage.getItem('admc-host'); } catch { return null; } },
+    set(v){ try { localStorage.setItem('admc-host', v); } catch {} },
+    clear(){ try { localStorage.removeItem('admc-host'); } catch {} }
+  };
+  let hostKey = null, hostFrom = 'stepWho', hostLoaded = false;
+  function openHost() {
+    hostFrom = ['stepWho', 'stepCode', 'stepView'].find(s => !$(s).classList.contains('hidden')) || 'stepWho';
+    show('stepHost'); window.scrollTo(0, 0);
+    if (!INDEX || !INDEX.host) { $('hostForm').classList.add('hidden'); $('hostMsg').textContent = 'The host guide isn\'t on the site yet.'; return; }
+    if (hostKey) return showHostBody();
+    $('hostForm').classList.remove('hidden'); $('hostBody').classList.add('hidden');
+    const saved = hostStore.get();
+    if (saved) tryHost(saved, true); else setTimeout(() => $('hostInput').focus(), 50);
+  }
+  async function tryHost(pw, quiet) {
+    const btn = $('hostBtn'), msg = $('hostMsg');
+    btn.disabled = true; btn.textContent = 'Checking…'; msg.textContent = ''; msg.className = 'msg';
+    try {
+      const k = norm(pw) ? await tryKey('HOST|' + norm(pw), INDEX.host) : null;
+      if (!k) { if (quiet) hostStore.clear(); else { msg.textContent = 'That isn\'t the host password.'; msg.className = 'msg bad'; } return; }
+      hostKey = k; hostStore.set(norm(pw)); showHostBody();
+    } finally { btn.disabled = false; btn.textContent = 'Open the guide'; }
+  }
+  function showHostBody() {
+    $('hostForm').classList.add('hidden'); $('hostBody').classList.remove('hidden');
+    if (!hostLoaded) { hostLoaded = true; loadPages(INDEX.host, hostKey, $('pagesHost')); }
+  }
+  async function downloadHostPdf() {
+    const btn = $('hostPdf'); btn.disabled = true; btn.textContent = 'Preparing…';
+    try {
+      const plain = await open(hostKey, await getBytes(`data/${INDEX.host.dir}/${INDEX.host.pdf}`));
+      const url = URL.createObjectURL(new Blob([plain], { type: 'application/pdf' }));
+      const a = document.createElement('a'); a.href = url; a.download = 'A Dead Man\'s Chest - Host & Co-host Guide.pdf';
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 60000);
+    } catch (e) {
+      if (e && e.status === 404) hardReload(); else alert('The PDF didn\'t download. Try again.');
+    } finally { btn.disabled = false; btn.textContent = 'Download the PDF'; }
+  }
+  function lockHost() {
+    hostStore.clear(); hostKey = null; hostLoaded = false; $('pagesHost').innerHTML = ''; $('hostInput').value = '';
+    $('hostBody').classList.add('hidden'); $('hostForm').classList.remove('hidden'); $('hostInput').focus();
+  }
 
   // ---------- step 2 ----------
   async function unlock(c, quiet) {
@@ -551,6 +626,11 @@ ol.log li.undone{color:var(--muted);text-decoration:line-through}
     } finally { btn.disabled = false; btn.textContent = 'Open my envelope'; }
   };
   $('confirmNo').onclick = () => { $('confirm').classList.add('hidden'); show('stepWho'); $('whoInput').focus(); };
+  $('hostOpen').onclick = openHost;
+  $('hostBack').onclick = () => { show(hostFrom); window.scrollTo(0, 0); };
+  $('hostForm').onsubmit = e => { e.preventDefault(); tryHost($('hostInput').value); };
+  $('hostPdf').onclick = downloadHostPdf;
+  $('hostLock').onclick = lockHost;
   $('zoomClose').onclick = () => $('zoom').classList.remove('on');
   document.addEventListener('keydown', e => { if (e.key === 'Escape') { $('zoom').classList.remove('on'); $('showov').classList.remove('on'); if (!$('confirm').classList.contains('hidden')) $('confirmNo').click(); } });
 

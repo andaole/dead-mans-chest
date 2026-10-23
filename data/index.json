@@ -12,16 +12,16 @@
    "side": "The Scurvy Knave",
    "sa": {
     "title": "Your packet",
-    "salt": "veuiI8IGXUc1BkjMkzu/9Q==",
-    "check": "Zh+if37tx7Yv5vXpTjHUi9ehcXXX1ChWA2w+BLw2+CoqJJc6H50=",
-    "dir": "4a6a686b90287b57",
+    "salt": "T0Qkut1HctvRQgnpv89Q8w==",
+    "check": "8O12e1GCw2zeSEPN7fzqLxTW8A4Snsqr5hb9uKE2rX2F7iAhtWU=",
+    "dir": "5598e5d772558aa1",
     "pages": 13
    },
    "env": {
     "title": "Your envelope",
-    "salt": "Ss3Kf5G3XjuKOu4Kz45QlQ==",
-    "check": "ko0m96P2eguoPD0ayoqJ9+0sQOynl+U8GV3L1zkP6L8+i5CeCfw=",
-    "dir": "7642c78fce829db1",
+    "salt": "SoHbLDPZyFBTytHCiHPJ5A==",
+    "check": "XJZmhjCxqlWobkutMCLTYv9hZLFlLt25acKpEGLnmtC9R7um8OM=",
+    "dir": "640cb8ef5ffacee1",
     "pages": 2,
     "cards": true
    }
@@ -35,16 +35,16 @@
    "side": "The Scurvy Knave",
    "sa": {
     "title": "Your packet",
-    "salt": "mCILKGsEMLJkOaybB+fClA==",
-    "check": "fLnSi3IQWdg3H6MFbHwfi/lEcKikebF+x1JXjitKkydlhgHrTUk=",
-    "dir": "586bddb405f43ef2",
+    "salt": "XDKvO+Pc/z5QB0oFqtvdrQ==",
+    "check": "FvDKEVfgM/MDfVbpaQb4jiaASuOG6CSSuytBLfPDWwPHrp4IBPg=",
+    "dir": "e8ed9d5873d610f4",
     "pages": 12
    },
    "env": {
     "title": "Your envelope",
-    "salt": "N9eRqqzyG2Vsx7yvet2XfA==",
-    "check": "1xTGjvLspa5CghWmUpB4dbZjvh7SYqKuLkWK4WwReHSpmAHjzdo=",
-    "dir": "a63a9475b6f73dd1",
+    "salt": "O1NtRYWxmzpS77nfaqGfgQ==",
+    "check": "noAxl5yeNOD/5tz2v/2lKfshQCE59sybUoMthdRKNP1TDZD0E0w=",
+    "dir": "718eaa099b79f054",
     "pages": 3,
     "cards": true
    }
@@ -58,16 +58,16 @@
    "side": "The Scurvy Knave",
    "sa": {
     "title": "Your packet",
-    "salt": "P9E16gTtkNfkX40Boi5zJA==",
-    "check": "ugbBMsWCOyTLbot966FkHpNGWwWbkm2s/tPwbMA83JEItvhtS8k=",
-    "dir": "c41d0e5d80a4e36a",
+    "salt": "bh3+IIJH+AlQ8iZ/3+dRtw==",
+    "check": "PBzXOelDw/pATR0qd3/8EBtcddTj9opfsOC3IO2CRF04Nx/bJUc=",
+    "dir": "b529eb6573455c71",
     "pages": 13
    },
    "env": {
     "title": "Your envelope",
-    "salt": "do7Ik5+EfqHM9C1xTvKIgQ==",
-    "check": "d9XlOIK4B+ND+i7+rfdoPG4mpmtk2g4/Zn56EQrae/3wMbbjASM=",
-    "dir": "d42f5b34adc93572",
+    "salt": "s/bpd3kAiTNdsk4Kwetkww==",
+    "check": "zifEXJ7sXWwG0GBbDbGIr+RS4fjFV88pgIRDUScAhTEE7igerpc=",
+    "dir": "60637f2bc1f6088f",
     "pages": 2,
     "cards": true
    }
@@ -81,16 +81,16 @@
    "side": "The Scurvy Knave",
    "sa": {
     "title": "Your packet",
-    "salt": "oW7u5n6Lkc021A1sklDW1Q==",
-    "check": "zu6Om4/L6jwQVxvehcsLGtG3XGM9d+4XfgVuneu32pBy+2sjbPw=",
-    "dir": "44d51172e80eada1",
+    "salt": "L3q+TMfhy/LZ5wCMXDAd0Q==",
+    "check": "8FlL1iV7PNBf1nzNKRRbBwHGM3k8ie4DSGXv2dddKc3qUj0MH5I=",
+    "dir": "6bb6244c3fe3e0d0",
     "pages": 13
    },
    "env": {
     "title": "Your envelope",
-    "salt": "7T594bjRG0sm941FQkllgw==",
-    "check": "uHL4Nzy2Ap7Oe24l+P+gwUILsNCNWOVpDU4QUiwYUPl8nmS3D60=",
-    "dir": "695fadfaf6352217",
+    "salt": "KX05mbLDKmWjZXAd1cJRHQ==",
+    "check": "OHCs/B5mvM33LzFYUa60S3JLjM7CHXwZqmMWh0aTAqBlGck2OzQ=",
+    "dir": "0df9d00d43da2897",
     "pages": 2,
     "cards": true
    }
@@ -104,16 +104,16 @@
    "side": "The Scurvy Knave",
    "sa": {
     "title": "Your packet",
-    "salt": "ZwrXnKvcZ2S4R/cd5LhdOw==",
-    "check": "C80Kj1X3SFXYsoGHbpSg91zMTnAwJf6vq5HBqMARTD21+coFqoM=",
-    "dir": "92742ae961cc88c3",
+    "salt": "94Ay6uZ3JNIy1pgr2rfJ3Q==",
+    "check": "t1VeXastz+YLzEIOfQxUZVqMdbm6beYmL87/Ipi0e2hvZaWzET0=",
+    "dir": "068f5f7a08cdde01",
     "pages": 10
    },
    "env": {
     "title": "Your envelope",
-    "salt": "6C8u5AdW6Xc5X04mQE/L5g==",
-    "check": "TWf3T20u5oJ+0cxWuc3DLb6dMMdIGrGjtHiAfF6VwsY5PJk8Yp0=",
-    "dir": "49df3287ffee0f61",
+    "salt": "OHw8ykzkiCVPmMBqPKPl4w==",
+    "check": "5DAvGz499uW5vdLIlEa+VDAPcrFXHe5Ed4gaHe5d+CbH0m66A1s=",
+    "dir": "e57601af24477350",
     "pages": 1,
     "cards": true
    }
@@ -127,16 +127,16 @@
    "side": "The Fury",
    "sa": {
     "title": "Your packet",
-    "salt": "ayhDTbm6rZDzX582vBso5w==",
-    "check": "J42p/fWlnElpMCFIV3799f0GauYAyXz4DF96AITlkm2mzamp0II=",
-    "dir": "367534120ea4f724",
+    "salt": "gyAwwPC/3BPT0jigyILMCw==",
+    "check": "YFkw9OwlOeqBpH8L0i/Z2Dv+HyrN90Z4saByGUM1PD2Gs1kYkwQ=",
+    "dir": "435f7e705fa90600",
     "pages": 13
    },
    "env": {
     "title": "Your envelope",
-    "salt": "Tnt3liw8dZUKAymk3Wh46g==",
-    "check": "9tVtnBFvf1Q/f6CRriIutX3JO3JeOWDvMzwsaPCGyvMD9jOMBIE=",
-    "dir": "30040316a128c2b1",
+    "salt": "RZ6SRflHUyI+yb+Rl673wA==",
+    "check": "y/KRxriUjeVn8aTVTU7oqcbrN7vmS1rlUQ5t2DDvdFU/BuKTPOk=",
+    "dir": "094c07f95294596a",
     "pages": 2,
     "cards": true
    }
@@ -150,16 +150,16 @@
    "side": "The Fury",
    "sa": {
     "title": "Your packet",
-    "salt": "6o9WkcobCxgoWgbFpODCCQ==",
-    "check": "Hn6n3CyP+SZtGij8QbhkpO/Y1NqgXFSKdUkO4CZet3mRYIFFPqg=",
-    "dir": "ec699f04b64fdef5",
+    "salt": "pJ7rRvVBnxvQA4txNZHCDg==",
+    "check": "cNupFUPyh9sMwfgp/20vmd4Pdj8YFavGqPlW61wrNCNd9XGQdUM=",
+    "dir": "046c3870a244c9a9",
     "pages": 13
    },
    "env": {
     "title": "Your envelope",
-    "salt": "rnB0l5MBVqSWcLYXspTEyQ==",
-    "check": "kY/u+bdkIf/ukHnpb1tFG9yvLNY4KVzxZNvK24ewCpLSrng+3Us=",
-    "dir": "0f0fecc883f26446",
+    "salt": "Kf9koH6CrpGKpkQTKtlgYA==",
+    "check": "TVgCR1hLRaMLLi4fpJH16KkL1XIG3lBZCegMBpHFHWdUFhEVUu4=",
+    "dir": "8e825f53e300186e",
     "pages": 2,
     "cards": true
    }
@@ -173,16 +173,16 @@
    "side": "The Fury",
    "sa": {
     "title": "Your packet",
-    "salt": "5GAMKQHV5zbZQPh2L9uVVQ==",
-    "check": "fSCZdl2Q7CUUq9g8JMoqHXLbiFMFWEzVexqnkqcFj1KCu9VIRIc=",
-    "dir": "aa92ffe78caa5c9f",
+    "salt": "KlseuNmveU66A2HoMj5A0g==",
+    "check": "+GX0fALIKdqn3gJsENcNB+UG1+O2cxyw32iqXOBkGhhOa5F4obs=",
+    "dir": "fd963bcfe99ac09e",
     "pages": 13
    },
    "env": {
     "title": "Your envelope",
-    "salt": "MOCKYmJM+FLZtKHUPlh2wA==",
-    "check": "uIkxjFT+mx1fCE7+GzGkt8zJprRu2xOhRQhs6WJyJdXFW8kTfTg=",
-    "dir": "6c296b32b5cbce27",
+    "salt": "I7XucGqn4QOtyqj1smZFpw==",
+    "check": "fZFHw8XkmnKdeQYsBotI3GetqFtxlqF0p5b9VpBwXI/ivzBdyA0=",
+    "dir": "c6625101a3bb4db5",
     "pages": 2,
     "cards": true
    }
@@ -196,16 +196,16 @@
    "side": "The Fury",
    "sa": {
     "title": "Your packet",
-    "salt": "xnX4Uh8rY57q1nh7h9avuA==",
-    "check": "7T6D5aQmR0WTG9a3Y8pq35TauXdYY/ixooZ9KVO2LmhOI1s2W/o=",
-    "dir": "757f19ebcd3810be",
+    "salt": "X4H0AW9MJi1GmmiA6JQOmA==",
+    "check": "G/Z6MAf3Q2uPZqxc1yKNQbWdkerDeRo5GSwRbggdLC+6qCWxGqU=",
+    "dir": "0536d77123e6c680",
     "pages": 9
    },
    "env": {
     "title": "Your envelope",
-    "salt": "dFUbYMg5mAoBUEKXBdTwtA==",
-    "check": "VVRJWnEk7KqDvLSGQ/KjLCv0Rr+nRFxkmXJMaJL5DLP4uoDiy3g=",
-    "dir": "ab815594dc0a3e41",
+    "salt": "4do51ob2P0L9PGHh6cW/BQ==",
+    "check": "npd9UShCh7rN8VSChrzlilfrQIlqih4FNLtCLTrBK52PUfpY7Po=",
+    "dir": "1ea954ac60af4263",
     "pages": 3,
     "cards": true
    }
@@ -219,16 +219,16 @@
    "side": "The Fury",
    "sa": {
     "title": "Your packet",
-    "salt": "xMC5vJQ+a+8VEnDnOwPPfA==",
-    "check": "TvEDnjWmK9SDlDah+qEyHRVSM6JSDPEu8C8oCjE8VFpFh4p9ylQ=",
-    "dir": "3737581acc38d822",
+    "salt": "4RdtMTOxmZY6OnsbFz9avw==",
+    "check": "zTMqM0LIzgLy1P6O7BS7X78HpF7ADThZFdLO774zPX/XYdYDC5M=",
+    "dir": "c72ed988595191c3",
     "pages": 10
    },
    "env": {
     "title": "Your envelope",
-    "salt": "+XthHI17QOcXfK/7aoqfWQ==",
-    "check": "bH+qRjA6NP7646c/ryO9U4v/F8ZvDIwjnstXRXZYD3OX+Dz6/04=",
-    "dir": "0b18a92a9032d9bd",
+    "salt": "eHgVVcphWa/EU5D5jZxhFg==",
+    "check": "4F6PJho/Vp/J+8Xu788n+lkkNldoH4h1+qbrty72ofb4nA/q5AQ=",
+    "dir": "4dd79bbba3f12e60",
     "pages": 3,
     "cards": true
    }
@@ -242,16 +242,16 @@
    "side": "The Fury",
    "sa": {
     "title": "Your packet",
-    "salt": "O+0pKJThZTjoPmHlvTbBEQ==",
-    "check": "Va1bVtFqwYF24SvQlONct0xgEW58HPwKspDKaev+8diF66HyYWs=",
-    "dir": "4c9b846e9e97bc2b",
+    "salt": "FfKi29EGDEoCQW+sQqWpcA==",
+    "check": "030Y44FRE7Z3rp3y6Tnik/3UDP4grmDXLyqzwC8G/a86xQ121GQ=",
+    "dir": "772ea5d2ce489024",
     "pages": 10
    },
    "env": {
     "title": "Your envelope",
-    "salt": "HIRe9Pj02ghSPcwvX1sS8w==",
-    "check": "N0UH7U8Pl5WdmAp2L+EW61aUc+ROpqnYFQd7sFV1Jpt7hoO8dy8=",
-    "dir": "3394f542daf556cb",
+    "salt": "d77J5qBb73CGq9TcfqqgWw==",
+    "check": "GF7j6TjyIHZe9rfV2Qgv1wZZAztLkLqT3EhgoAP+uYvy3xyPm3g=",
+    "dir": "d5ba0f0c4f9abf60",
     "pages": 3,
     "cards": true
    }
@@ -265,16 +265,16 @@
    "side": "Colonial forces",
    "sa": {
     "title": "Your packet",
-    "salt": "Vj6kb++mibT55NRg6g/Bhg==",
-    "check": "srlptzK/Uf/axHL48LtPvMI0TLpCMndx4Yg9vFDc7+tExas/iMc=",
-    "dir": "82a8a7b6f1096326",
+    "salt": "GBlZ94LkLn5yg1HKUNIEkA==",
+    "check": "1QH2CRzNU3TXvge/oqA2m7E7TX9L27z54SUbbpGEHuytA2CXSSg=",
+    "dir": "2bfc3b9f4b6c28b7",
     "pages": 13
    },
    "env": {
     "title": "Your envelope",
-    "salt": "5iIzRJCUrPQZoSeNvxsjQg==",
-    "check": "qWANrOhwgOp+3TDiyEl8Qo2NfArWjfQc4l2xhjkgnQNtVkSpZeA=",
-    "dir": "4862e2a0120815a1",
+    "salt": "wly+jQ1Fudj+VZUMqZoAsw==",
+    "check": "RIxrf1BOw8sAPHqDU7B+dashCB/XTiG7Ler56eYD/+iCdnY+hMw=",
+    "dir": "dd4e2565d0fba98c",
     "pages": 4,
     "cards": true
    }
@@ -288,16 +288,16 @@
    "side": "Colonial forces",
    "sa": {
     "title": "Your packet",
-    "salt": "h7fdAnKDqJOSwyKFIQSSLg==",
-    "check": "EDxQY+n4xVSdhb3NCp978yfIhrJGN/ySOan78On0aTGZEiuv4Mk=",
-    "dir": "b063972edf556f1e",
+    "salt": "7U9KDcqFhTRKnAf5ZH4+ug==",
+    "check": "qlQgJYOCMaMPyt1XdqI9MDFqzuApArN/00wHGmWZryvA0izwXQA=",
+    "dir": "93b7fcb89033a6f2",
     "pages": 13
    },
    "env": {
     "title": "Your envelope",
-    "salt": "8h4BJBVz6UykMDWucM1EaA==",
-    "check": "5k4jz51MAS5pFV28PcnL0pmv6JnVh1iXA0JZurFNAiLIDIDkhek=",
-    "dir": "9c4cee52ef26cc14",
+    "salt": "TTTZyxdcmbPLX7DU3XvpxQ==",
+    "check": "Ddcpy3NLbCPQNNm58IQt33Q5Ka93pTB8naCGAYrV66p8CoBz8/8=",
+    "dir": "7d3719856ede6050",
     "pages": 2,
     "cards": true
    }
@@ -311,16 +311,16 @@
    "side": "Colonial forces",
    "sa": {
     "title": "Your packet",
-    "salt": "HK0gBk8zIgA5GaR/vMdpkQ==",
-    "check": "F9Vkmhy7s/W/u6BEyPC1fqJY70ap4YwW+XcrTtbdP5QH7SS376M=",
-    "dir": "442f3cf81f8e8170",
+    "salt": "EwMM2Y4p25EM7bFrrwDRtw==",
+    "check": "3keYSB6mYpEBp8yy+/ovhqvdDU4TGhscyBg69dHZwz5zWhdIaxw=",
+    "dir": "72b381a1a5265256",
     "pages": 9
    },
    "env": {
     "title": "Your envelope",
-    "salt": "k5TAPDFHklB+QuTR8kC2Tw==",
-    "check": "WWdLN3FQGZWVL3RdafZ7HLFt1TxALXPgjVG/ebmo7nGLYBWriJY=",
-    "dir": "dfa65560c8337fec",
+    "salt": "Bg42/9R2wiEEVMyP7g2Sjg==",
+    "check": "CF7qi+ytgZg1oxtDSZ7raJcUzyHK+Wj32tkbgeGbuIUShf3mFu8=",
+    "dir": "f6e55e2c72bf7022",
     "pages": 4,
     "cards": true
    }
@@ -334,16 +334,16 @@
    "side": "Royal Navy",
    "sa": {
     "title": "Your packet",
-    "salt": "makCKGgEovaGPhHwolU22Q==",
-    "check": "cYeLLas/Uv3TAREMyhXRtp/R1FXhEo+v0x4daXLDGd1ZlkVqKwo=",
-    "dir": "f1b75aba723c6e09",
+    "salt": "dHg+vo6nb4N0JsvF2XAt1g==",
+    "check": "kPbqckbrUZ9Ly1LO9ep0VDs84fC2FOMP0Xx0oNCwJimFo6X56Z4=",
+    "dir": "f884fa281d3df7ff",
     "pages": 13
    },
    "env": {
     "title": "Your envelope",
-    "salt": "5ucprWmF/iLWiTFpxGisHQ==",
-    "check": "V/JwIp5DacEbs97QJFy7zZYQam+oAORq4sRkcM9Yye49VXoyjq0=",
-    "dir": "39325598b655edbd",
+    "salt": "YgK65JEUXv10Eqds1+ieXw==",
+    "check": "ma6k+sDFL8dfAtN8EG09p7GnI8DF2tInzl0XVulsgBcs+0/cNwY=",
+    "dir": "fae4043058f14ed7",
     "pages": 4,
     "cards": true
    }
@@ -357,16 +357,16 @@
    "side": "The Spanish",
    "sa": {
     "title": "Your packet",
-    "salt": "ZSXqzs9P175U8/qIwA/m9A==",
-    "check": "4SrSvwdDnUL1z5Ow//PWi3mp59V9hqiUOL7OzZB6JVXqkR0t1Rg=",
-    "dir": "d091b99e965f72ad",
+    "salt": "vibvGrdsxhi6nRx7bcYITw==",
+    "check": "xXSAxjjTRVqiIE7LdTnDeCl35UasDYrCxYkH0fLn2CCyCqK9bTU=",
+    "dir": "16cd4beba63b44f5",
     "pages": 9
    },
    "env": {
     "title": "Your envelope",
-    "salt": "j40kFXoapSQbnKTV+rqUaw==",
-    "check": "BF0hUkAIIQeDfmQ5xl8dC8Z0FXuWNJu92Sw/3mGTYN8xLqbK3aU=",
-    "dir": "ebc07cad97f8623a",
+    "salt": "wSfBEiGsOKcza8D2TCp4ug==",
+    "check": "WMaxPbG6a77F2/TtvCgqzoY4WdSc8fjEZxBCz9BWo4AKGT9fTNk=",
+    "dir": "27e6e613c3d390bf",
     "pages": 3,
     "cards": true
    }
@@ -380,16 +380,16 @@
    "side": "The Diaho",
    "sa": {
     "title": "Your packet",
-    "salt": "cCCHLEfEBae9N5bJCyjKPw==",
-    "check": "VZQvg4USn8b5d/yoMH4h4j2CjEOe2cg6soANTmKfsxtrlOP1c0A=",
-    "dir": "9728b5b90ae4619c",
+    "salt": "uaOM3PmUX4HQdHUsxn6I9w==",
+    "check": "dSm3h4Rc+tt2RA0C33WMZgPtTS3v+CIk4NxNcE5HHR8uVMNV+9E=",
+    "dir": "655872ba97e205fa",
     "pages": 13
    },
    "env": {
     "title": "Your envelope",
-    "salt": "1Lt1lsSsJZ6DApUJgyJ+9g==",
-    "check": "EiFunqx1aEUzidp0ObS84Fy6U0cP52nFtwD2Tw2YT180NMD5GK0=",
-    "dir": "9cd04df774474996",
+    "salt": "/FXfkskUcAmwM9gPrOG68Q==",
+    "check": "7C0rgLf6CEnfokvT81Xnj4d14oJLvDRNHn3V7UumxiOBooWprfE=",
+    "dir": "098fe6bac2b36af6",
     "pages": 2,
     "cards": true
    }
@@ -403,16 +403,16 @@
    "side": "The Diaho",
    "sa": {
     "title": "Your packet",
-    "salt": "aEo+lTjwilq5kaATup/DhQ==",
-    "check": "KuqqgqVpOn/4Tqdk2eptDQz1GncZVCK7UfQLueyH62F973cxuiY=",
-    "dir": "5b6c0b7f2aa03039",
+    "salt": "8grwPrOZ41rURLKNci3OvA==",
+    "check": "2tZ0JBsyTlcRRXIR6Wnrl4b1cF31vVq1oXW7cUxFNQKSWURHXl8=",
+    "dir": "520356beb3dd98e9",
     "pages": 13
    },
    "env": {
     "title": "Your envelope",
-    "salt": "sS6L1to8y1MSnvfrIFngag==",
-    "check": "RWkvIxRlbGMdEZ+x3k7Hui6OMgaBrZp88BpYa+lrvp/jpqCb8ws=",
-    "dir": "eda4033bf286b885",
+    "salt": "9NpAx79WAJUdtd6MUftqww==",
+    "check": "PE8DrFgwHfbpXjEhSZZX/gtxDiCPe+YIUXCEPQ9ouEKKGYWsC5c=",
+    "dir": "337ef95184d6f58d",
     "pages": 3,
     "cards": true
    }
@@ -426,16 +426,16 @@
    "side": "The Diaho",
    "sa": {
     "title": "Your packet",
-    "salt": "Tieetn3RXlwo2ejataBMoQ==",
-    "check": "Rh5Sg2VgCnNSUaA5FbrVFtcNwbotV13bnUiOS4JlZ7x7ma81kQY=",
-    "dir": "c75bfaf5e2d827b2",
+    "salt": "QNizdckxtKIAQPMcPVHTrA==",
+    "check": "8BmuqeGYm7vNj53LNBNphGQmUuvjPQ6XDZnB7Y+eVEMiPg2NNME=",
+    "dir": "9da52c2ec2846f4d",
     "pages": 12
    },
    "env": {
     "title": "Your envelope",
-    "salt": "WrwhiUSTkQbO2yhJFNyiXA==",
-    "check": "gWDzHL6RuaACv31oInyv/FVzb8LPT+WZ6wD1AahyUh4Bn+mnhyE=",
-    "dir": "1848dea07df64eb9",
+    "salt": "P57fQ8vpgDTC6fEQ3nvpWA==",
+    "check": "H34RdYDoEISA0TZXdLYgcPgMxLKU+iX8cAjGgvT/Wl25s9YQxQI=",
+    "dir": "a5b6db4155577ee4",
     "pages": 3,
     "cards": true
    }
@@ -449,16 +449,16 @@
    "side": "The Spanish",
    "sa": {
     "title": "Your packet",
-    "salt": "KkBY5okMEHq5gTLwEQpopA==",
-    "check": "OrV1+9e6S8DkXGP4wqXJ5qjG2PTAwYpRbXm3z1OirqsJGLSuId4=",
-    "dir": "38c354b8537aa8a2",
+    "salt": "9nlVos0cifaYpXELYrSTVA==",
+    "check": "pHy0EMp2PWjf7SCeV3hqTyir1V4RV5koXA0YREy31vIC4ITesSE=",
+    "dir": "abcd5039a362d345",
     "pages": 12
    },
    "env": {
     "title": "Your envelope",
-    "salt": "MK0oMgBPHoDZJvu+FfnW8g==",
-    "check": "7E+PLN5npyVB0oneeD3Ojvhbx7NCSaaqB8TGkwNxOlvJL6E9ii0=",
-    "dir": "80dbad2cf5a7340e",
+    "salt": "ZNKzxJeDzgfjsSWygHZ3yQ==",
+    "check": "+Ohl3SHPU0mg3l90jciva1K6cSwNVL8TfJwR/Iso6bAeQSNwLRs=",
+    "dir": "1d4687dd6bbe9eaf",
     "pages": 3,
     "cards": true
    }
@@ -472,16 +472,16 @@
    "side": "The Spanish",
    "sa": {
     "title": "Your packet",
-    "salt": "aObQf5ZOnwzFeaXrn2KhRg==",
-    "check": "6IFlY2ymxqGdarIkJj9kokxFevuYEdEfy3qzEcP5yWZelrj0MSA=",
-    "dir": "824704204e62770c",
+    "salt": "qwfNXCIXOcRHac05GrfFTA==",
+    "check": "hD8LUvDLgCV6sHjL+e5XXDlP+LknofGGvbUkF1SLKosdXCXRZwo=",
+    "dir": "c39b74cd93b3eb23",
     "pages": 13
    },
    "env": {
     "title": "Your envelope",
-    "salt": "kbWgQ+bgr8ZpQ2IXwlCScg==",
-    "check": "8I8Ls1sB0fidBiGY0g1EOzgEind/7gsDZES9WHWFxpzNHxIjJT4=",
-    "dir": "05259895c37b0144",
+    "salt": "DdWQC6kkzWXwo4fgITsVEQ==",
+    "check": "DepRvliRXYot6lQs1rZVfAXgp5YNzv5ICwN//WhWFyIW8muWX8o=",
+    "dir": "6480441b888de844",
     "pages": 3,
     "cards": true
    }
@@ -495,16 +495,16 @@
    "side": "Independent",
    "sa": {
     "title": "Your packet",
-    "salt": "UTj8XEUph0aQb7JK1wESiQ==",
-    "check": "SELS35izJPH9x3cPKBhm2BNXrWh0QjJu1V1nRsy36suEPpsV0yw=",
-    "dir": "a469f4bb5d2505cc",
+    "salt": "klz3HQz3P4j7358fjiqOgg==",
+    "check": "dZLkzidiO4UCLeJ+MeFnNefnmIOPyik0Y6aad3u7Z57gRON5IpU=",
+    "dir": "30fd57faf9e936e3",
     "pages": 12
    },
    "env": {
     "title": "Your envelope",
-    "salt": "wDAbEgo2GxZC3/Y5RR2B4g==",
-    "check": "6yKnp3iH10m3XTdDtUbYBCtubCkdff/pzb7uiBmabKPqVx7SXAQ=",
-    "dir": "938894c1de9feb90",
+    "salt": "0Whkthan6SU0l78FvvZ9QQ==",
+    "check": "xaG7fx4XDi+/IEWcZnAvJr9++OWmhl8Y+IM2+X3zptORbkuVrTk=",
+    "dir": "aa2984642a2e9f2b",
     "pages": 2,
     "cards": true
    }
@@ -518,16 +518,16 @@
    "side": "Independent",
    "sa": {
     "title": "Your packet",
-    "salt": "3Do/6EAqOVetm7MTDeY/QA==",
-    "check": "WE0hyhNTC7JOTp4AR0NI1QeyUagUIlqUK5t4cGHvdrhdl5qJLqc=",
-    "dir": "6b93adcde3b61d94",
+    "salt": "t+Dum0CIdZzvP8O0T5KF7g==",
+    "check": "qy7sXdwtMQvKsOTlsGStOIYFVOZFAagjSGU2ZPu721lNwlaeK6M=",
+    "dir": "77b1c3b695da8dff",
     "pages": 9
    },
    "env": {
     "title": "Your envelope",
-    "salt": "bWPZosMGVpZ54KmIfO2/sw==",
-    "check": "B9LH4qlTOFj2Dr18jVqeCXjjvcmi/U85K+IKT9GmyNCHBy//eQk=",
-    "dir": "e8814c1d4074c08a",
+    "salt": "v//kWZBzY8tI1alXUZy1UQ==",
+    "check": "qFTEUwqd//prHlsme+0zRc2wh1jr7+XY/EDlq8rmEF599VgBma4=",
+    "dir": "4c302cce6c419467",
     "pages": 4,
     "cards": true
    }
@@ -541,19 +541,27 @@
    "side": "The island",
    "sa": {
     "title": "Your packet",
-    "salt": "jumfXVNRtPHQJRR9jVif8w==",
-    "check": "Bsj8tz+cb/Lt7O+dMgw10W4KwoBUxfyGuDH1SXQG6poOxDBoElg=",
-    "dir": "569602f595a65259",
+    "salt": "EFUkkgAjF9WuKLonZBoH8g==",
+    "check": "uy5NJD8XWPpaOSNj9K9buzFzEQl/XP1dNPlqDPmSFJRAddQisjY=",
+    "dir": "b158ec1a5d319d47",
     "pages": 10
    },
    "env": {
     "title": "Your envelope",
-    "salt": "aYr3SNpiMUeZpdsZtxC3Ng==",
-    "check": "yHCyxhu3njwarRC0hDXkHXl6otf1YLZNPbHWtgPaglBIyH31ZrE=",
-    "dir": "1276c4ebc166285b",
+    "salt": "bGnpuxzqnwFns322QQ3AqQ==",
+    "check": "tvBluQkg6LSos3LtRbkPeM0WMl22t+TWVRCQzjJ+cXY1iS+xDlo=",
+    "dir": "634df7a8fb384256",
     "pages": 4,
     "cards": true
    }
   }
- ]
+ ],
+ "host": {
+  "title": "Host & Co-host Guide",
+  "salt": "F3Q/9Fu3xYIW+HObTu+81w==",
+  "check": "N8dM1S+hLUO+AYr8XbNz0UsuHjA0FDjYJQkDUwe/KzwRE9S2FNg=",
+  "dir": "99e1a2709c58765a",
+  "pages": 42,
+  "pdf": "guide.bin"
+ }
 }

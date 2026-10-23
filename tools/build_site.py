@@ -126,7 +126,13 @@ def main():
     ap.add_argument("--card-images", help="folder of item-card JPEGs named like the cards JSON 'img' fields")
     ap.add_argument("--envelopes-only", action="store_true",
                     help="re-render only the envelopes, keeping the existing send-ahead files")
+    ap.add_argument("--host-guide", help="the Host & Co-host Guide PDF, shown behind --host-password")
+    ap.add_argument("--host-password", help="password for the host guide (kept OUTSIDE the repo)")
     a = ap.parse_args()
+    if bool(a.host_guide) != bool(a.host_password):
+        sys.exit("--host-guide and --host-password go together")
+    if a.host_password and len(norm(a.host_password)) < 10:
+        sys.exit("Host password is too short: the guide contains the solution")
 
     cast = json.load(open(os.path.join(HERE, "cast.json"), encoding="utf-8"))
     codes = json.load(open(a.codes)) if os.path.exists(a.codes) else {}
@@ -173,6 +179,21 @@ def main():
         print(f"{c['num']} {c['player']:<18} send-ahead {players[-1]['sa']['pages']:>2} pp, envelope {len(env)} pp")
 
     index = {"version": 1, "iterations": ITER, "envelopeLocked": party is not None, "players": players}
+    if a.host_guide:
+        # Host & Co-host Guide: page images plus the PDF itself, under the host password.
+        # Its own "HOST|" prefix keeps it apart from every player key.
+        host_secret = "HOST|" + norm(a.host_password)
+        host = section(render(a.host_guide), host_secret, "Host & Co-host Guide")
+        salt = base64.b64decode(host["salt"])
+        with open(os.path.join(DATA, host["dir"], "guide.bin"), "wb") as fh:
+            fh.write(seal(derive(host_secret, salt), open(a.host_guide, "rb").read()))
+        host["pdf"] = "guide.bin"
+        index["host"] = host
+        print(f"host guide {host['pages']} pp")
+    elif a.envelopes_only:
+        prev = json.load(open(os.path.join(DATA, "index.json"), encoding="utf-8"))
+        if "host" in prev:
+            index["host"] = prev["host"]
     json.dump(index, open(os.path.join(DATA, "index.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     print("Wrote", os.path.join(DATA, "index.json"))
 

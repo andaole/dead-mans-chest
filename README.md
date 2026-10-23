@@ -10,18 +10,21 @@ A small static site where each player at our *A Dead Man's Chest* murder mystery
 5. Their **envelope** stays sealed until Anthony announces the **party word** at the game.
 6. The **Cards** tab (also unlocked by the party word) lists their abilities, Secret, Information and starting items. Each card has a full-screen **Show** button; abilities have **Use** buttons that tick off uses, with **Undo** and a timestamped activity log saved on that phone.
 
+7. **Host or co-host?** (bottom of the page) opens the Host & Co-host Guide behind its own host password, with a PDF download.
+
 ## Privacy
 
 Every page is stored only in encrypted form in `data/`, using AES-256-GCM.
 
 - The key for a player's send-ahead packet comes from their password, run through PBKDF2-SHA256 with 400k iterations and a per-section salt.
 - The key for their envelope comes from their password plus the party word.
+- The host guide (and its PDF) has its own key, from the host password. It contains the solution, so its password is long, not a packet number.
 
 Without the password, the files in this repo are noise. That holds even though the repo is public. Inside the party it's an honor system: passwords are deliberately simple, and the pop-up asks people to open only their own packet. The site never sends codes anywhere; all decryption happens in the browser.
 
 The cast list in `data/index.json` (player, character, side, one-line description) is public, the same as the casting list players already received.
 
-**The passwords and the party word are NOT in this repo.** Anthony has them.
+**The passwords, the party word and the host password are NOT in this repo.** Anthony has them.
 
 ## Rebuilding
 
@@ -33,7 +36,8 @@ python3 tools/build_site.py \
   --packets "/path/to/A_Dead_Mans_Chest/Packets" \
   --codes ../codes.json \
   --party-word "THE-PARTY-WORD" \   # or --no-envelope-lock to open envelopes now
-  --cards ../cards_data.json --card-images ../crops_jpg   # card text + item images, kept OUTSIDE the repo
+  --cards ../cards_data.json --card-images ../crops_jpg \  # card text + item images, kept OUTSIDE the repo
+  --host-guide "/path/to/Host & Co-host Guide.pdf" --host-password "THE-HOST-PASSWORD"
 git add -A && git commit -m "Rebuild packets" && git push
 ```
 
