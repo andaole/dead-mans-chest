@@ -109,6 +109,7 @@ footer{color:#8fa4aa;text-align:center;font-size:13px;margin-top:28px}
 .dot{width:20px;height:20px;border-radius:50%;border:2px solid var(--rust);display:inline-block}
 .dot.on{background:var(--rust)}
 .pc.spent{opacity:.6}
+.pc.lead{border:2px solid var(--gold);background:#fff3d6}
 .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
 .sbtn{font:700 14px "Source Sans 3";border-radius:9px;padding:9px 14px;border:1.5px solid var(--rust);background:var(--rust);color:#fff6e6;cursor:pointer;min-height:40px}
 .sbtn.alt{background:transparent;color:var(--rust)}
@@ -430,6 +431,7 @@ ol.log li.undone{color:var(--muted);text-decoration:line-through}
     const c = CARDS, who = me.character;
     let h = '';
     if (c.note) h += `<div class="note">${esc(c.note)}</div>`;
+    if (c.lead) h += `<div class="cards-sec"><h3>New information</h3><p class="tip" style="margin:0">Part of your character, and only you know it. Keep it secret.</p><div class="cgrid"><div class="pc lead">${cardHtml(who + ' · New information', c.lead.title, c.lead.body)}<div class="acts"><button class="sbtn alt" data-show="l">Show</button></div></div></div></div>`;
     h += `<div class="cards-sec"><h3>Abilities</h3><p class="tip" style="margin:0">Tap <b>Use</b> each time you play one, and <b>Show</b> to show it to someone.</p><div class="cgrid">`;
     c.abilities.forEach((a, i) => {
       const left = a.uses ? a.uses - usedOf(i) : 1;
@@ -473,6 +475,7 @@ ol.log li.undone{color:var(--muted);text-decoration:line-through}
   function showCard(ref) {
     const c = CARDS, who = me.character; let inner = '';
     if (ref[0] === 'a') { const i = +ref.slice(1), a = c.abilities[i]; inner = cardHtml(who + ' · Ability', a.title, a.body) + (a.uses ? `<div class="uses">${a.uses - usedOf(i)} of ${a.uses} uses left</div>` : '<div class="uses">Permanent ability</div>'); }
+    else if (ref === 'l') inner = cardHtml(who + ' · New information', c.lead.title, c.lead.body);
     else if (ref === 's') inner = cardHtml(who, 'Secret', c.secret);
     else if (ref === 'n') inner = cardHtml(who, 'Information', c.information);
     else { const it = c.items[+ref.slice(1)]; inner = it.img ? `<div class="k">Item</div><img src="${it.img}" alt="${esc(it.title)}">` : cardHtml('Item', it.title, it.body); }

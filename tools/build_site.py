@@ -159,7 +159,8 @@ def main():
                      ENV_SKIP_ALL | ENV_SKIP.get(c["num"], set()))
         if a.extra_env:
             for extra in sorted(glob.glob(os.path.join(a.extra_env, f"{c['num']} *.pdf"))):
-                env += render(extra)
+                # a private murder lead goes on top ("read this first"); anything else at the end
+                env = render(extra) + env if " lead" in os.path.basename(extra) else env + render(extra)
         env_secret = code + "|" + party if party else code + "|envelope"
         players.append({
             "num": c["num"], "player": c["player"], "character": c["character"],
