@@ -18,7 +18,7 @@ Every page is stored only in encrypted form in `data/`, using AES-256-GCM.
 
 - The key for a player's send-ahead packet comes from their password, run through PBKDF2-SHA256 with 400k iterations and a per-section salt.
 - The key for their envelope comes from their password plus the party word.
-- The host guide (and its PDF) has its own key, from the host password. It contains the solution, so its password is long, not a packet number.
+- The host guide (and its PDF) has its own key, from the host password. It contains the solution, so its password is separate from every packet number. To change only the guide or its password, run `tools/build_host.py`.
 
 Without the password, the files in this repo are noise. That holds even though the repo is public. Inside the party it's an honor system: passwords are deliberately simple, and the pop-up asks people to open only their own packet. The site never sends codes anywhere; all decryption happens in the browser.
 

@@ -131,8 +131,8 @@ def main():
     a = ap.parse_args()
     if bool(a.host_guide) != bool(a.host_password):
         sys.exit("--host-guide and --host-password go together")
-    if a.host_password and len(norm(a.host_password)) < 10:
-        sys.exit("Host password is too short: the guide contains the solution")
+    if a.host_password and len(norm(a.host_password)) < 6:
+        sys.exit("Host password is too short")
 
     cast = json.load(open(os.path.join(HERE, "cast.json"), encoding="utf-8"))
     codes = json.load(open(a.codes)) if os.path.exists(a.codes) else {}
