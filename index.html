@@ -268,6 +268,21 @@ ol.log li.undone{color:var(--muted);text-decoration:line-through}
   const loaded = { sa: false, env: false, cards: false };
   const urls = [];
 
+  // Fetch with retries: GitHub Pages sometimes answers 503 for a moment.
+  async function getBytes(url) {
+    let last;
+    for (const wait of [0, 700, 1600, 3200]) {
+      if (wait) await new Promise(r => setTimeout(r, wait));
+      try {
+        const r = await fetch(url, { cache: 'no-cache' });
+        if (r.ok) return await r.arrayBuffer();
+        last = new Error(String(r.status)); last.status = r.status;
+        if (r.status === 404) break;            // file moved: the site was updated
+      } catch (e) { last = e; }
+    }
+    throw last;
+  }
+  const SITE_UPDATED = 'This page moved because the site was just updated.';
   async function derive(secret, saltB64) {
     const base = await crypto.subtle.importKey('raw', enc.encode(secret), 'PBKDF2', false, ['deriveKey']);
     return crypto.subtle.deriveKey(
@@ -393,11 +408,14 @@ ol.log li.undone{color:var(--muted);text-decoration:line-through}
     if (!me.env.cards) { box.innerHTML = '<p class="sub">No cards for this character.</p>'; return; }
     box.innerHTML = '<div class="spinner" aria-label="Loading cards"></div>';
     try {
-      const r = await fetch(`data/${me.env.dir}/cards.bin`, { cache: 'no-cache' });
-      if (!r.ok) throw new Error(r.status);
-      CARDS = JSON.parse(new TextDecoder().decode(await open(envKey, await r.arrayBuffer())));
+      CARDS = JSON.parse(new TextDecoder().decode(await open(envKey, await getBytes(`data/${me.env.dir}/cards.bin`))));
       ST = mem[me.num] || loadSt(); renderCards();
-    } catch (e) { box.innerHTML = '<p class="msg bad">Couldn\'t load your cards. Refresh to try again.</p>'; loaded.cards = false; }
+    } catch (e) {
+      const moved = e && e.status === 404;
+      box.innerHTML = `<p class="msg bad">${moved ? SITE_UPDATED : 'Your cards didn\'t load.'}</p><button class="btn" type="button" id="cardsRetry">${moved ? 'Reload the site' : 'Try again'}</button>`;
+      $('cardsRetry').onclick = () => { if (moved) hardReload(); else { loaded.cards = true; loadCards(); } };
+      loaded.cards = false;
+    }
   }
   function cardHtml(kind, title, body, extra = '') {
     return `<div class="k">${esc(kind)}</div><div class="t">${esc(title)}</div>${body ? `<div class="b">${esc(body)}</div>` : ''}${extra}`;
@@ -481,20 +499,25 @@ ol.log li.undone{color:var(--muted);text-decoration:line-through}
       while (next < sec.pages) {
         const i = next++;
         const frame = figs[i].querySelector('.frame');
+        await loadOne(sec, key, i, frame);
+      }
+    }
+    async function loadOne(sec, key, i, frame) {
+        frame.innerHTML = '<div class="spinner" aria-label="Loading page"></div>';
         try {
-          const r = await fetch(`data/${sec.dir}/${i + 1}.bin`, { cache: 'force-cache' });
-          if (!r.ok) throw new Error(r.status);
-          const plain = await open(key, await r.arrayBuffer());
+          const plain = await open(key, await getBytes(`data/${sec.dir}/${i + 1}.bin`));
           const url = URL.createObjectURL(new Blob([plain], { type: 'image/webp' })); urls.push(url);
           const img = new Image(); img.alt = `Page ${i + 1}`; img.src = url;
           frame.innerHTML = ''; frame.appendChild(img);
           frame.onclick = () => { $('zoomImg').src = url; $('zoom').classList.add('on'); $('zoom').scrollTo(0, 0); };
         } catch (e) {
-          frame.innerHTML = '<span style="padding:20px;color:#a0261a;font-weight:600">Couldn\'t load this page. Refresh to try again.</span>';
+          const moved = e && e.status === 404;
+          frame.onclick = null;
+          frame.innerHTML = `<div style="padding:20px;text-align:center"><p style="color:#a0261a;font-weight:600;margin:0 0 10px">${moved ? SITE_UPDATED : 'This page didn\'t load.'}</p><button class="btn" type="button">${moved ? 'Reload the site' : 'Try again'}</button></div>`;
+          frame.querySelector('button').onclick = ev => { ev.stopPropagation(); moved ? hardReload() : loadOne(sec, key, i, frame); };
         }
-      }
     }
-    await Promise.all([worker(), worker(), worker()]);
+    await Promise.all([worker(), worker()]);
   }
   function signOut() {
     store.clear(); me = code = saKey = envKey = CARDS = null; loaded.sa = loaded.env = loaded.cards = false; tab = 'sa';
@@ -529,7 +552,8 @@ ol.log li.undone{color:var(--muted);text-decoration:line-through}
   document.addEventListener('keydown', e => { if (e.key === 'Escape') { $('zoom').classList.remove('on'); $('showov').classList.remove('on'); if (!$('confirm').classList.contains('hidden')) $('confirmNo').click(); } });
 
   // ---------- boot ----------
-  fetch('data/index.json', { cache: 'no-cache' }).then(r => r.json()).then(async idx => {
+  function hardReload() { location.replace(location.pathname + '?r=' + Date.now()); }
+  fetch('data/index.json?t=' + Date.now(), { cache: 'no-store' }).then(r => r.json()).then(async idx => {
     INDEX = idx;
     if (!window.crypto || !crypto.subtle) { $('whoMsg').textContent = 'This browser can\'t open the packets. Try Safari or Chrome.'; $('whoMsg').className = 'msg bad'; return; }
     const saved = store.get();
