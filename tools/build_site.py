@@ -121,6 +121,7 @@ def main():
     g = ap.add_mutually_exclusive_group(required=True)
     g.add_argument("--party-word")
     g.add_argument("--no-envelope-lock", action="store_true")
+    ap.add_argument("--extra-env", help="folder of extra envelope pages, files named 'NN anything.pdf' (appended to that player's envelope)")
     ap.add_argument("--cards", help="plaintext cards JSON kept OUTSIDE the repo (abilities, secret, info, items)")
     ap.add_argument("--card-images", help="folder of item-card JPEGs named like the cards JSON 'img' fields")
     ap.add_argument("--envelopes-only", action="store_true",
@@ -156,6 +157,9 @@ def main():
         code = norm(codes[c["num"]])
         env = render(find_pdf(os.path.join(a.packets, "2_Envelopes"), c["num"]),
                      ENV_SKIP_ALL | ENV_SKIP.get(c["num"], set()))
+        if a.extra_env:
+            for extra in sorted(glob.glob(os.path.join(a.extra_env, f"{c['num']} *.pdf"))):
+                env += render(extra)
         env_secret = code + "|" + party if party else code + "|envelope"
         players.append({
             "num": c["num"], "player": c["player"], "character": c["character"],
