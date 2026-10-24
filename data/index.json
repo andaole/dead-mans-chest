@@ -558,19 +558,14 @@
  ],
  "host": {
   "title": "Host & co-host",
-  "salt": "JdrGhVcEawkLM5jrR6HkMw==",
-  "check": "xwYhe8mXrO59uH1XWvjvzk67mBsMkM4BM3unFIImi4NQHBSlOMk=",
-  "dir": "562101a78b87401c",
+  "salt": "ucH8qSf5KnTrLvy9L6g6lw==",
+  "check": "RBoFUuAfIlR7uyh2TShi0KcwIMm0BmrQxE86f22G/RAip5Cx978=",
+  "dir": "9f8d81ec1b7731d1",
   "docs": [
    {
     "id": "host",
     "title": "Host",
-    "pages": 10
-   },
-   {
-    "id": "web",
-    "title": "Who needs whom",
-    "pages": 2
+    "pages": 12
    },
    {
     "id": "cohost",

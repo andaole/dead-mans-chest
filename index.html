@@ -398,7 +398,7 @@ ol.log li.undone{color:var(--muted);text-decoration:line-through}
       hostKey = k; hostStore.set(norm(pw)); showHostBody();
     } finally { btn.disabled = false; btn.textContent = 'Open the guide'; }
   }
-  const HOST_TIPS = { host: 'Everything the host does, in order. Tap a page to zoom in.', cohost: 'Hand this to your co-host: their jobs, timeline and ledger. Tap a page to zoom in.', guide: 'The complete guide, including the solution. Tap a page to zoom in.', web: 'Who needs whom: one row per character, with every secret. Host only. Tap a page to zoom in.' };
+  const HOST_TIPS = { host: 'Everything the host does, in order, with the Who needs whom chart on the last two pages. Tap a page to zoom in.', cohost: 'Hand this to your co-host: their jobs, timeline and ledger. Tap a page to zoom in.', guide: 'The complete guide, including the solution. Tap a page to zoom in.', web: 'Who needs whom: one row per character, with every secret. Host only. Tap a page to zoom in.' };
   let hostDoc = null; const hostBoxes = {};
   function showHostBody() {
     $('hostForm').classList.add('hidden'); $('hostBody').classList.remove('hidden');
