@@ -558,24 +558,24 @@
  ],
  "host": {
   "title": "Host & co-host",
-  "salt": "N/WX6cXO7/ZTW1Vdegy++Q==",
-  "check": "ZYmecmNP75tRnK4H4VqchB4u7dr9ox1xlRLZARtZe6EZdAUrnaU=",
-  "dir": "9d1ec6660fe01e13",
+  "salt": "3gFCCE/0fsC0VSY7zqAEmg==",
+  "check": "9oXBGy32CVmO4wRyb9hchZ0jUWEHLoBFAl6tPh6RZNaquOCklew=",
+  "dir": "8f6a4e1b2ad4d06f",
   "docs": [
    {
     "id": "host",
     "title": "Host",
-    "pages": 9
+    "pages": 11
    },
    {
     "id": "cohost",
     "title": "Co-host",
-    "pages": 4
+    "pages": 5
    },
    {
     "id": "guide",
     "title": "Full guide",
-    "pages": 45
+    "pages": 46
    }
   ],
   "pdf": "guide.bin"
