@@ -180,17 +180,8 @@ def main():
 
     index = {"version": 1, "iterations": ITER, "envelopeLocked": party is not None, "players": players}
     if a.host_guide:
-        # Host & Co-host Guide: page images plus the PDF itself, under the host password.
-        # Its own "HOST|" prefix keeps it apart from every player key.
-        host_secret = "HOST|" + norm(a.host_password)
-        host = section(render(a.host_guide), host_secret, "Host & Co-host Guide")
-        salt = base64.b64decode(host["salt"])
-        with open(os.path.join(DATA, host["dir"], "guide.bin"), "wb") as fh:
-            fh.write(seal(derive(host_secret, salt), open(a.host_guide, "rb").read()))
-        host["pdf"] = "guide.bin"
-        index["host"] = host
-        print(f"host guide {host['pages']} pp")
-    elif a.envelopes_only:
+        sys.exit("Host area: run tools/build_host.py after this build (it adds Host, Co-host and Full guide tabs).")
+    if a.envelopes_only:
         prev = json.load(open(os.path.join(DATA, "index.json"), encoding="utf-8"))
         if "host" in prev:
             index["host"] = prev["host"]

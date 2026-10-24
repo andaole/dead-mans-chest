@@ -227,12 +227,13 @@ ol.log li.undone{color:var(--muted);text-decoration:line-through}
       <div class="msg" id="hostMsg"></div>
     </form>
     <div id="hostBody" class="hidden">
+      <div class="tabs" role="tablist" id="hostTabs"></div>
+      <p class="tip" id="hostTip">Tap a page to zoom in.</p>
       <div class="row" style="margin-top:0">
-        <button class="btn" id="hostPdf" type="button">Download the PDF</button>
+        <button class="btn" id="hostPdf" type="button">Download the full guide (PDF)</button>
         <button class="btn ghost" id="hostLock" type="button">Lock this phone</button>
       </div>
-      <p class="tip">The PDF is searchable and easier to print. Tap a page to zoom in.</p>
-      <div class="pages" id="pagesHost"></div>
+      <div id="pagesHostWrap"></div>
     </div>
   </section>
 
@@ -397,9 +398,31 @@ ol.log li.undone{color:var(--muted);text-decoration:line-through}
       hostKey = k; hostStore.set(norm(pw)); showHostBody();
     } finally { btn.disabled = false; btn.textContent = 'Open the guide'; }
   }
+  const HOST_TIPS = { host: 'Everything the host does, in order. Tap a page to zoom in.', cohost: 'Hand this to your co-host: their jobs, timeline and ledger. Tap a page to zoom in.', guide: 'The complete guide, including the solution. Tap a page to zoom in.' };
+  let hostDoc = null; const hostBoxes = {};
   function showHostBody() {
     $('hostForm').classList.add('hidden'); $('hostBody').classList.remove('hidden');
-    if (!hostLoaded) { hostLoaded = true; loadPages(INDEX.host, hostKey, $('pagesHost')); }
+    if (!hostLoaded) {
+      hostLoaded = true;
+      const tabs = $('hostTabs'), wrap = $('pagesHostWrap'); tabs.innerHTML = ''; wrap.innerHTML = '';
+      INDEX.host.docs.forEach(doc => {
+        const t = document.createElement('button'); t.className = 'tab'; t.type = 'button'; t.setAttribute('role', 'tab'); t.textContent = doc.title;
+        t.onclick = () => selectHostDoc(doc.id); tabs.appendChild(t); doc.tab = t;
+        const box = document.createElement('div'); box.className = 'pages hidden'; wrap.appendChild(box); hostBoxes[doc.id] = box;
+      });
+      let start = 'host';
+      try { start = localStorage.getItem('admc-host-doc') || 'host'; } catch {}
+      selectHostDoc(INDEX.host.docs.some(d => d.id === start) ? start : INDEX.host.docs[0].id);
+    }
+  }
+  function selectHostDoc(id) {
+    hostDoc = id; try { localStorage.setItem('admc-host-doc', id); } catch {}
+    INDEX.host.docs.forEach(doc => {
+      doc.tab.setAttribute('aria-selected', doc.id === id); hostBoxes[doc.id].classList.toggle('hidden', doc.id !== id);
+      if (doc.id === id && !doc.loaded) { doc.loaded = true; loadPages({ dir: INDEX.host.dir + '/' + doc.id, pages: doc.pages }, hostKey, hostBoxes[doc.id]); }
+    });
+    $('hostTip').textContent = HOST_TIPS[id] || 'Tap a page to zoom in.';
+    $('hostPdf').classList.toggle('hidden', !INDEX.host.pdf);
   }
   async function downloadHostPdf() {
     const btn = $('hostPdf'); btn.disabled = true; btn.textContent = 'Preparing…';
@@ -414,7 +437,7 @@ ol.log li.undone{color:var(--muted);text-decoration:line-through}
     } finally { btn.disabled = false; btn.textContent = 'Download the PDF'; }
   }
   function lockHost() {
-    hostStore.clear(); hostKey = null; hostLoaded = false; $('pagesHost').innerHTML = ''; $('hostInput').value = '';
+    hostStore.clear(); hostKey = null; hostLoaded = false; $('pagesHostWrap').innerHTML = ''; $('hostTabs').innerHTML = ''; INDEX.host.docs.forEach(d => { d.loaded = false; }); $('hostInput').value = '';
     $('hostBody').classList.add('hidden'); $('hostForm').classList.remove('hidden'); $('hostInput').focus();
   }
 

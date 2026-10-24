@@ -10,7 +10,7 @@ A small static site where each player at our *A Dead Man's Chest* murder mystery
 5. Their **envelope** stays sealed until Anthony announces the **party word** at the game.
 6. The **Cards** tab (also unlocked by the party word) lists their abilities, Secret, Information and starting items. Each card has a full-screen **Show** button; abilities have **Use** buttons that tick off uses, with **Undo** and a timestamped activity log saved on that phone.
 
-7. **Host or co-host?** (bottom of the page) opens the Host & Co-host Guide behind its own host password, with a PDF download.
+7. **Host or co-host?** (bottom of the page) opens three tabs behind the host password: **Host** (the host's night), **Co-host** (their jobs, timeline and ledger) and **Full guide** (with a PDF download). Rebuild them with `tools/build_host.py`.
 
 ## Privacy
 
