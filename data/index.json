@@ -558,9 +558,9 @@
  ],
  "host": {
   "title": "Host & co-host",
-  "salt": "QZbgnTd+iS4C9ns0o8cGrw==",
-  "check": "uG+nMhhInhjp1e/Y17bVrjqt44rLIN6hS5Fh5qOu5f4Zk321YUA=",
-  "dir": "9e70fc4bb653316d",
+  "salt": "QFEdDV02Y6dgSEyAjgCUVA==",
+  "check": "+aH//nRFcC6CSkiF1yxEIdBlvMFcsCvps7Lymdxzad5W0sXLBpg=",
+  "dir": "4a265848e656836a",
   "docs": [
    {
     "id": "host",
