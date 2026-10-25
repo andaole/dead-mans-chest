@@ -128,6 +128,18 @@ ol.log li.undone{color:var(--muted);text-decoration:line-through}
 .toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);width:min(420px,calc(100% - 32px));justify-content:space-between;z-index:80;background:#2b1d12;color:#fff6e6;border-radius:12px;padding:12px 14px;display:none;align-items:center;gap:12px;box-shadow:0 10px 30px rgba(0,0,0,.4);max-width:calc(100% - 32px)}
 .toast.on{display:flex}
 .toast button{background:none;border:1.5px solid #fff6e6;color:#fff6e6;border-radius:8px;padding:6px 10px;font:700 14px "Source Sans 3";cursor:pointer}
+.recap .kick{font:600 12px/1 "Source Sans 3";letter-spacing:.2em;text-transform:uppercase;color:var(--rust);margin-bottom:6px}
+.recap h3{font:400 21px/1.2 "IM Fell English",Georgia,serif;margin:20px 0 6px;color:var(--rust)}
+.recap p{margin:0 0 10px} .recap ul{margin:0 0 10px 1.1em;padding:0} .recap li{margin-bottom:6px}
+.recap .lede{font-style:italic;font-size:17px}
+.recap .ships{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:8px 0 12px}
+.recap .ships div{border:1.5px solid var(--rust);border-radius:10px;padding:10px 12px;background:#fffaf0}
+.recap .ships b{display:block;font:400 19px/1.2 "IM Fell English",Georgia,serif;color:var(--rust);margin-bottom:2px}
+.recap details{margin-top:14px;border-top:1px solid var(--line);padding-top:10px}
+.recap summary{cursor:pointer;font:400 21px/1.2 "IM Fell English",Georgia,serif;color:var(--rust)}
+.recap dl{margin:10px 0 0;display:grid;grid-template-columns:minmax(120px,32%) 1fr;gap:8px 14px}
+.recap dt{font-weight:700} .recap dd{margin:0}
+@media (max-width:520px){.recap dl{grid-template-columns:1fr;gap:2px}.recap dd{margin-bottom:8px}}
 .hidden{display:none!important}
 </style>
 </head>
@@ -138,6 +150,68 @@ ol.log li.undone{color:var(--muted);text-decoration:line-through}
     <h1>A Dead Man's Chest</h1>
     <p>Look up your character packet. Keep your secrets to yourself.</p>
   </header>
+
+
+  <!-- After the game: recap -->
+  <section class="card recap" id="recap">
+    <div class="kick">The night of 24 October · it's over, so spoilers below</div>
+    <h2>What happened on Santo Oloroso</h2>
+    <p class="lede">Six months after Captain Flint was found dead in his cabin, throat cut and a black crow's feather left behind, everyone who wanted something from his death washed up on the same small volcanic island. Here's how the night went.</p>
+
+    <h3>The killer's tools, stolen in the first minutes</h3>
+    <p>Almost before the storm had gathered, the Reverend Ian Plumpton (Matt) picked the pocket of the ship's doctor, Sawbones McGraw (Danny), and came away with his <b>poison</b>. Why would a ship's doctor be carrying poison? Suspicion found Sawbones far earlier than he'd have liked. (The Reverend, of course, was no reverend: he was Light-fingered Les, a thief in a borrowed collar.)</p>
+
+    <h3>Bill Pistol remembers</h3>
+    <p>For years the Diaho had looked after Bill Pistol (Barak), the pirate who helped Flint bury his treasure and lost his mind when Flint shot the other diggers. Sawbones sat with him and talked him gently back to his senses, and with his sanity came his memory: Bill knew the short way to the treasure, and the race for Flint's hoard was on.</p>
+
+    <h3>Flint's treasure, scattered</h3>
+    <ul>
+      <li><b>Saucy Nancy</b> (Karen) held four of the six treasures, and lost them all in the fighting at the end.</li>
+      <li><b>Wynn Harcourt</b> (Courtney) secured the <b>title deeds to Chole Hall</b>, the family manor Flint stole. The Governor's quiet secretary goes home a landowner.</li>
+      <li><b>Jay Sommer</b> (Lawrence), the stowaway, came away with the sixth treasure.</li>
+    </ul>
+    <p>With the hoard dug out of the mountain, Yocahu was placated, and nobody was sacrificed to the volcano.</p>
+
+    <h3>Pardons: promised freely, given rarely</h3>
+    <p>Sir Percival Stanforth (John D.), the only man on the island who could pardon a pirate, promised pardons to a great many people. In the end he signed just <b>two</b>.</p>
+
+    <h3>The last stand</h3>
+    <p>When the storm cleared and the voting began, Saucy Nancy was in the running for a ship. Then <b>Shay Collins</b> (Shubhanga) made her move. Loyal Shay was really Nelly Strychnine, a bounty hunter who had joined the <i>Fury</i> to collect the price on Nancy's head. She went for her captain, failed to bring her down, and fell, and with her <b>Last Dying Breath</b> she took Nancy with her. Nancy's four treasures were lost in the fight, and her claim on a ship died with her.</p>
+
+    <h3>Who sailed away</h3>
+    <div class="ships">
+      <div><b>Don Inigo de Velez y Contrera</b>The most votes on the island. The Spanish nobleman took the first ship, and only his valet knew the man at the helm was El Cuervo himself.</div>
+      <div><b>Hayapitl, chief of the Diaho</b>With Nancy gone, the second ship went to an unlikely captain on three votes: the chief who had wanted the pirates off his island all along.</div>
+    </div>
+    <p>Black Jack McCracken (David), Flint's old right-hand man, mustered a single vote and was left on the beach. Captain Overy (Alvaro) won no ship, so there were no arrests: the pirates left behind are stranded, but free.</p>
+
+    <details open>
+      <summary>The solution: who killed Captain Flint</summary>
+      <p style="margin-top:10px"><b>Sawbones McGraw did.</b> As Flint's trusted doctor he mixed the captain's bedtime toddy, and the night Flint died he laced it with horned-viper venom. He had come to believe, from his studies of the sicknesses of the mind, that Flint was a dangerous madman who had to be stopped.</p>
+      <p>Later that same night, <b>El Cuervo</b>, who is <b>Don Inigo</b>, crept into the cabin and cut Flint's throat, leaving his crow's feather. But Flint was already dead: no struggle, no mark on him, and barely any blood. The whole Caribbean blamed El Cuervo for a murder he didn't commit.</p>
+      <p>Why not Flint's two lieutenants? Black Jack and Saucy Nancy were together that night, so each was the other's alibi, and they fell out so bitterly after his death that a joint plot is hard to believe. That left the one other person Flint trusted, with the opportunity, the motive and easy access to poisons: the ship's doctor. Motive, opportunity and means, as Sir Percival put it, and for that he offered his heartiest congratulations.</p>
+    </details>
+
+    <details>
+      <summary>Everything else that was really going on</summary>
+      <dl>
+        <dt>El Cuervo</dt><dd>Don Inigo (Jose). Only his valet Salamanca (Vy) knew.</dd>
+        <dt>"Tom" the cabin boy</dt><dd>Meg Stanforth (Morgan), the Governor's younger daughter, in disguise.</dd>
+        <dt>Rose</dt><dd>Jim Flint (Dan H.), the captain's son, disguised as a girl on the <i>Fury</i>.</dd>
+        <dt>Shay Collins</dt><dd>Bounty hunter Nelly Strychnine (Shubhanga), after the price on Black Jack and Saucy Nancy.</dd>
+        <dt>Reverend Plumpton</dt><dd>Light-fingered Les (Matt), a thief posing as a missionary.</dd>
+        <dt>Blaise Richelieu</dt><dd>A French spy (Mark), and the agent Jay was sent to find with "Where is the silver fish?"</dd>
+        <dt>Jay Sommer</dt><dd>A rookie secret agent (Lawrence), sent to recover the queen's ruby necklace Salamanca was carrying.</dd>
+        <dt>Wynn Harcourt</dt><dd>The <i>Caribbean Courier</i>'s secret source inside Government House (Courtney).</dd>
+        <dt>Grace Cooper</dt><dd>El Cuervo's biggest fan (Fawn), crow's feather and all.</dd>
+        <dt>Louis de Monnaie</dt><dd>Plotting to escape his master, Swelter (John S.).</dd>
+        <dt>Elizabeth's "kidnap"</dt><dd>Elizabeth (Diana) asked Saucy Nancy to kidnap her, to escape marrying Don Inigo. Her father was swept up by accident.</dd>
+        <dt>The anonymous notes</dt><dd>Overy wrote the note that lured Saucy Nancy here as a trap. Alice (Caitlin) secretly copied it to Black Jack, hoping the crews would reunite.</dd>
+        <dt>The Royal College letter</dt><dd>A forgery by Alice and Bill Pistol. Sawbones believed it was real.</dd>
+      </dl>
+    </details>
+    <p style="margin:16px 0 0;font-weight:600">Thanks for sailing with us, crew. 🦜</p>
+  </section>
 
   <!-- Step 1: who -->
   <section class="card" id="stepWho">
@@ -665,7 +739,7 @@ ol.log li.undone{color:var(--muted);text-decoration:line-through}
     const saved = store.get();
     const p = saved && INDEX.players.find(x => x.num === saved.num);
     if (p && saved.code) { pick(p, true); $('codeInput').value = saved.code; if (await unlock(saved.code, true)) return; show('stepCode'); }
-    else $('whoInput').focus();
+    else { $('whoInput').focus({ preventScroll: true }); window.scrollTo(0, 0); }
   }).catch(() => { $('whoMsg').textContent = 'Couldn\'t load the crew list. Refresh to try again.'; $('whoMsg').className = 'msg bad'; });
 })();
 </script>
